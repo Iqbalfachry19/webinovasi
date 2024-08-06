@@ -12,7 +12,7 @@ function WebsiteBuilder() {
         <h1 className="mb-12 w-[20px] text-start text-6xl font-bold md:w-[470px]">
           Bangun Website Sesuai Seleramu
         </h1>
-        <p className="mb-8 w-[100px] text-start font-sans text-2xl md:w-[370px]">
+        <p className="mb-8 w-[240px] text-start font-sans text-2xl md:w-[370px]">
           Dengan Inovasiweb, kamu bisa membangun websitemu sendiri tanpa perlu
           khawatir lagi hasilnya tidak sesuai.
         </p>
