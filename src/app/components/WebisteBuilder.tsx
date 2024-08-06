@@ -4,14 +4,15 @@ import Image from "next/image";
 function WebsiteBuilder() {
   return (
     <div className="mx-auto flex max-w-[1150px] flex-col py-8 xl:flex-row">
-      <Image
-        src="/gambar-2.webp"
-        alt="Business People"
-        width={500}
-        height={150}
-        style={{ objectFit: "cover" }}
-        className="bg-blend-overlay"
-      />
+      <div>
+        <Image
+          src="/gambar-2.webp"
+          alt="Business People"
+          fill
+          style={{ objectFit: "cover" }}
+          className="bg-blend-overlay"
+        />
+      </div>
 
       <div className="px-10 py-20">
         <h1 className="mb-12 w-[470px] text-start text-6xl font-bold">
