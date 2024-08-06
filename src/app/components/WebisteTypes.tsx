@@ -7,7 +7,7 @@ function WebsiteTypes() {
       <h1 className="mb-12 text-center text-4xl font-bold">
         Buat Websitemu Sekarang
       </h1>
-      <div className="flex flex-col justify-center space-y-8 xl:flex-row xl:space-x-8 xl:space-y-0">
+      <div className="flex flex-col justify-center space-y-8 px-2 xl:flex-row xl:space-x-8 xl:space-y-0">
         {/* Website LandingPage Section */}
         <div className="relative flex flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center">
           <div className="absolute inset-0">
