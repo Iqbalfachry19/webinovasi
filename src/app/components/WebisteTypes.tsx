@@ -66,15 +66,17 @@ function WebsiteTypes() {
               className="absolute inset-0 z-[-1]"
             />
           </div>
-          <h2 className="mb-4 text-2xl font-bold text-white">
-            Website E-Commerce
-          </h2>
-          <a
-            className="inline-block rounded bg-[#5B59C2] px-6 py-3 text-white transition duration-300 hover:bg-[#6766c3]"
-            href="http://wa.me/+6282287169964"
-          >
-            Beli Disini
-          </a>
+          <div>
+            <h2 className="mb-4 text-2xl font-bold text-white">
+              Website E-Commerce
+            </h2>
+            <a
+              className="inline-block rounded bg-[#5B59C2] px-6 py-3 text-white transition duration-300 hover:bg-[#6766c3]"
+              href="http://wa.me/+6282287169964"
+            >
+              Beli Disini
+            </a>
+          </div>
         </div>
       </div>
     </div>
