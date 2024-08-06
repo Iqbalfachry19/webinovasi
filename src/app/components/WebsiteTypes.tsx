@@ -7,9 +7,9 @@ function WebsiteTypes() {
       <h1 className="mb-12 text-center text-4xl font-bold">
         BUAT WEBSITEMU SEKARANG
       </h1>
-      <div className="flex flex-col justify-center space-y-8 px-2 xl:flex-row xl:space-x-8 xl:space-y-0">
+      <div className="flex flex-col justify-center space-y-8 px-2 md:flex-row md:items-center md:justify-center md:space-x-2 md:space-y-0 xl:flex-row xl:space-x-8 xl:space-y-0">
         {/* Website LandingPage Section */}
-        <div className="relative flex h-[200px] w-full flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center xl:h-[300px] xl:w-[340px]">
+        <div className="relative flex h-[200px] w-full flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center md:w-[300px] xl:h-[300px] xl:w-[340px]">
           <div className="pointer-events-none absolute inset-0">
             <Image
               src="/Startup-business-spaceship-goals-launch-concept-1.png"
@@ -34,7 +34,7 @@ function WebsiteTypes() {
         </div>
 
         {/* Dibikinin Website Section */}
-        <div className="relative flex h-[200px] flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center xl:h-[300px] xl:w-[340px]">
+        <div className="relative flex h-[200px] flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center md:w-[300px] xl:h-[300px] xl:w-[340px]">
           <div className="pointer-events-none absolute inset-0">
             <Image
               src="/Startup-business-spaceship-goals-launch-concept-2.png"
@@ -59,7 +59,7 @@ function WebsiteTypes() {
         </div>
 
         {/* Website E-Commerce Section */}
-        <div className="relative flex h-[200px] flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center xl:h-[300px] xl:w-[340px]">
+        <div className="relative flex h-[200px] flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center md:w-[300px] xl:h-[300px] xl:w-[340px]">
           <div className="pointer-events-none absolute inset-0">
             <Image
               src="/Startup-business-spaceship-goals-launch-concept.png"

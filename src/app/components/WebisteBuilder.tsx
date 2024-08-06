@@ -3,22 +3,16 @@ import Image from "next/image";
 
 function WebsiteBuilder() {
   return (
-    <div className="mx-auto flex max-w-[1150px] flex-col py-8 xl:flex-row">
-      <div>
-        <Image
-          src="/gambar-2.webp"
-          alt="Business People"
-          fill
-          style={{ objectFit: "cover" }}
-          className="bg-blend-overlay"
-        />
+    <div className="mx-auto flex max-w-[1150px] flex-col px-2 py-8 md:flex-row xl:flex-row">
+      <div className="relative h-[620px] w-full rounded-xl bg-cover md:ml-20 md:h-[380px] md:w-[340px] xl:h-[600px] xl:w-full xl:bg-contain">
+        <Image src="/gambar-2.webp" alt="Business People" fill />
       </div>
 
       <div className="px-10 py-20">
         <h1 className="mb-12 w-[470px] text-start text-6xl font-bold">
           Bangun Website Sesuai Seleramu
         </h1>
-        <p className="mb-8 w-[470px] text-start font-sans text-2xl">
+        <p className="mb-8 w-[470px] text-start font-sans text-2xl md:w-[370px]">
           Dengan Inovasiweb, kamu bisa membangun websitemu sendiri tanpa perlu
           khawatir lagi hasilnya tidak sesuai.
         </p>
