@@ -8,7 +8,7 @@ function WebsiteBuilder() {
         <Image
           src="/gambar-2.webp"
           alt="Business People"
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "contain" }}
           fill
         />
       </div>
