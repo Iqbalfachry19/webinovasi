@@ -17,6 +17,7 @@ function Navbar() {
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="text-black focus:outline-none"
+          aria-label={isOpen ? "Close menu" : "Open menu"}
         >
           <svg
             className="h-6 w-6"
