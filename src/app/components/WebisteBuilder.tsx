@@ -9,7 +9,7 @@ function WebsiteBuilder() {
       </div>
 
       <div className="px-10 py-20">
-        <h1 className="mb-12 w-[470px] text-start text-6xl font-bold">
+        <h1 className="mb-12 w-[20px] text-start text-6xl font-bold md:w-[470px]">
           Bangun Website Sesuai Seleramu
         </h1>
         <p className="mb-8 w-[470px] text-start font-sans text-2xl md:w-[370px]">
