@@ -20,7 +20,7 @@ function Navbar() {
         >
           <svg
             className="h-6 w-6"
-            fill="#000000"
+            fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -36,9 +36,7 @@ function Navbar() {
       </div>
 
       {/* Navigation Links */}
-      <nav
-        className={`flex-1 space-x-4 lg:flex ${isOpen ? "block" : "hidden"}`}
-      >
+      <nav className="hidden space-x-4 lg:flex">
         <p className="cursor-pointer">Home</p>
         <p className="cursor-pointer">Tema</p>
         <p className="cursor-pointer">Cara Custom Web</p>
@@ -51,14 +49,39 @@ function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu Button Section */}
+      {/* Mobile Menu */}
       <div
-        className={`fixed left-0 top-0 h-full w-full bg-black/70 text-black lg:hidden ${isOpen ? "block" : "hidden"}`}
+        className={`fixed left-0 top-0 z-50 flex h-full w-full flex-col bg-black/70 text-white lg:hidden ${isOpen ? "flex" : "hidden"}`}
       >
-        <div className="flex h-full flex-col items-center justify-center bg-white">
-          <p className="cursor-pointer py-4">Home</p>
-          <p className="cursor-pointer py-4">Tema</p>
-          <p className="cursor-pointer py-4">Cara Custom Web</p>
+        <div className="flex h-full flex-col items-center justify-center">
+          <button
+            onClick={() => setIsOpen(false)}
+            className="self-end p-4 text-white"
+          >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+          <p className="cursor-pointer py-4" onClick={() => setIsOpen(false)}>
+            Home
+          </p>
+          <p className="cursor-pointer py-4" onClick={() => setIsOpen(false)}>
+            Tema
+          </p>
+          <p className="cursor-pointer py-4" onClick={() => setIsOpen(false)}>
+            Cara Custom Web
+          </p>
           <button className="mt-4 rounded bg-[#5B59C2] px-4 py-2 text-white hover:bg-[#6766c3]">
             Kontak Kami
           </button>
