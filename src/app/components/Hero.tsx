@@ -3,8 +3,8 @@ import Image from "next/image";
 function Hero() {
   return (
     <>
-      <div className="relative mx-auto flex min-h-screen max-w-[1150px] flex-col items-center bg-center">
-        <div className="relative flex h-[600px] w-full flex-col items-center overflow-hidden rounded-2xl bg-black/20 bg-opacity-80 p-8 text-center text-white bg-blend-overlay">
+      <div className="relative mx-auto flex min-h-screen max-w-[1150px] flex-col items-center bg-center px-4 sm:px-6 lg:px-8">
+        <div className="relative flex w-full flex-col items-center overflow-hidden rounded-2xl bg-black/20 bg-opacity-80 p-4 text-center text-white bg-blend-overlay sm:p-8 lg:p-12">
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
@@ -14,15 +14,17 @@ function Hero() {
               style={{ objectFit: "cover" }}
               className="bg-blend-overlay"
             />
-            <div className="absolute inset-0 bg-black/50 bg-opacity-50"></div>
+            <div className="absolute inset-0 bg-black/50"></div>
           </div>
 
           {/* Content Section */}
-          <div className="relative z-10 flex h-full w-full flex-col items-center justify-center">
+          <div className="relative z-10 flex w-full flex-col items-center justify-center pb-8 pt-12 md:pb-12 md:pt-16">
             {/* Heading Section */}
-            <div className="mb-8">
-              <h1 className="mb-4 text-3xl font-bold">PERTAMA DI PEKANBARU</h1>
-              <h2 className="text-6xl font-semibold">
+            <div className="mb-6 md:mb-8">
+              <h1 className="text-2xl font-bold sm:text-3xl md:text-4xl">
+                PERTAMA DI PEKANBARU
+              </h1>
+              <h2 className="text-4xl font-semibold sm:text-5xl md:text-6xl lg:text-6xl">
                 BIKIN WEBSITE
                 <br />
                 BISNISMU SENDIRI
@@ -34,21 +36,21 @@ function Hero() {
             </div>
 
             {/* Button Section */}
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 md:flex-row md:gap-6">
               <a
-                className="inline-block rounded bg-[#5B59C2] px-6 py-3 text-white hover:bg-[#6766c3]"
+                className="inline-block rounded bg-[#5B59C2] px-4 py-2 text-base text-white hover:bg-[#6766c3] sm:px-6 sm:py-3 sm:text-lg md:px-8 md:py-4 md:text-xl"
                 href="http://wa.me/+6282287169964"
               >
                 Coba Sekarang
               </a>
               <a
-                className="group flex items-center rounded-full bg-white px-6 py-3 text-black duration-150 hover:bg-[#5B59C2] hover:text-white"
+                className="group flex items-center rounded-full bg-white px-4 py-2 text-base text-black duration-150 hover:bg-[#5B59C2] hover:text-white sm:px-6 sm:py-3 sm:text-lg md:px-8 md:py-4 md:text-xl"
                 href="#alasan"
               >
                 Pelajari Lebih Lanjut
                 <svg
                   aria-hidden="true"
-                  className="ml-2 h-5 w-5 fill-current text-black duration-150 group-hover:text-white"
+                  className="ml-2 h-4 w-4 fill-current text-black duration-150 group-hover:text-white sm:h-5 sm:w-5 md:h-6 md:w-6"
                   viewBox="0 0 448 512"
                   xmlns="http://www.w3.org/2000/svg"
                 >
