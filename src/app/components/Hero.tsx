@@ -4,13 +4,6 @@ import Image from "next/image";
 function Hero() {
   return (
     <>
-      <Head>
-        <link
-          rel="preload"
-          href="/Group-of-business-people-working-in-office.svg"
-          as="image"
-        />
-      </Head>
       <div className="relative mx-auto flex min-h-screen max-w-[1150px] flex-col items-center bg-center">
         <div className="relative flex h-[600px] w-full flex-col items-center overflow-hidden rounded-2xl bg-black/20 bg-opacity-80 p-8 text-center text-white bg-blend-overlay">
           {/* Background Image */}
@@ -19,6 +12,7 @@ function Hero() {
               src="/Group-of-business-people-working-in-office.svg"
               alt="Business People"
               fill
+              priority
               style={{ objectFit: "cover" }}
               className="bg-blend-overlay"
             />
