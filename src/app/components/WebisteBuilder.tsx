@@ -7,10 +7,12 @@ function WebsiteBuilder() {
       <Image
         src="/gambar-2.webp"
         alt="Business People"
-        fill
+        width={300}
+        height={50}
         style={{ objectFit: "cover" }}
         className="bg-blend-overlay"
       />
+
       <div>
         <h1 className="mb-12 text-center text-4xl font-bold">
           Bangun Website Sesuai Seleramu
