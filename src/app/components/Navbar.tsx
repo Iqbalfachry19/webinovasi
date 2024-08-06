@@ -38,9 +38,15 @@ function Navbar() {
 
       {/* Navigation Links */}
       <nav className="hidden space-x-4 lg:flex">
-        <p className="cursor-pointer">Home</p>
-        <p className="cursor-pointer">Tema</p>
-        <p className="cursor-pointer">Cara Custom Web</p>
+        <p className="cursor-pointer hover:border-b hover:border-[#5B59C2] hover:bg-[#5B59C2]">
+          Home
+        </p>
+        <p className="cursor-pointer hover:border-b hover:border-[#5B59C2] hover:bg-[#5B59C2]">
+          Tema
+        </p>
+        <p className="hover:bg-[#5B59C2]] cursor-pointer hover:border-b hover:border-[#5B59C2]">
+          Cara Custom Web
+        </p>
       </nav>
 
       {/* Button Section */}
