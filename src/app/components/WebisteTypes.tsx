@@ -35,7 +35,7 @@ function WebsiteTypes() {
         <div className="relative flex flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center">
           <div className="absolute inset-0">
             <Image
-              src="/Startup-business-spaceship-goals-launch-concept-1.png"
+              src="/Startup-business-spaceship-goals-launch-concept-2.png"
               alt="Background"
               fill
               style={{ objectFit: "cover" }}
@@ -58,7 +58,7 @@ function WebsiteTypes() {
         <div className="relative flex flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center">
           <div className="absolute inset-0">
             <Image
-              src="/Startup-business-spaceship-goals-launch-concept-1.png"
+              src="/Startup-business-spaceship-goals-launch-concept.png"
               alt="Background"
               fill
               style={{ objectFit: "cover" }}
