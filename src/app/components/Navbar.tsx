@@ -12,7 +12,7 @@ function Navbar() {
         <p className="cursor-pointer">Tema</p>
         <p className="cursor-pointer">Cara Custom Web</p>
       </nav>
-      <button className="rounded bg-[#5B59C2] px-4 py-2 text-white hover:bg-[#5B59C2]">
+      <button className="rounded bg-[#5B59C2] px-4 py-2 text-white hover:hover:bg-[#6766c3]">
         Kontak Kami
       </button>
     </div>
