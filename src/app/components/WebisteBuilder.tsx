@@ -4,7 +4,7 @@ import Image from "next/image";
 function WebsiteBuilder() {
   return (
     <div className="mx-auto flex max-w-[1150px] flex-col px-2 py-8 md:flex-row xl:flex-row">
-      <div className="relative h-[620px] w-full rounded-xl bg-cover md:ml-24 md:h-[380px] md:w-[300px] xl:h-[600px] xl:w-full xl:bg-contain">
+      <div className="relative h-[620px] w-full rounded-xl bg-cover md:ml-24 md:h-[380px] md:w-[290px] xl:h-[600px] xl:w-full xl:bg-contain">
         <Image src="/gambar-2.webp" alt="Business People" fill />
       </div>
 
