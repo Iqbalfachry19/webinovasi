@@ -8,7 +8,7 @@ function WebsiteTypes() {
       </h1>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {/* Website LandingPage Section */}
-        <div className="flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
+        <div className="flex flex-col items-center rounded-lg bg-black/50 p-8 text-center">
           <h2 className="mb-4 text-2xl font-bold text-white">
             Website LandingPage
           </h2>
@@ -21,7 +21,7 @@ function WebsiteTypes() {
         </div>
 
         {/* Dibikinin Website Section */}
-        <div className="flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
+        <div className="flex flex-col items-center rounded-lg bg-black/50 p-8 text-center">
           <h2 className="mb-4 text-2xl font-bold text-white">
             Dibikinin Website
           </h2>
@@ -34,7 +34,7 @@ function WebsiteTypes() {
         </div>
 
         {/* Website E-Commerce Section */}
-        <div className="flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
+        <div className="flex flex-col items-center rounded-lg bg-black/50 p-8 text-center">
           <h2 className="mb-4 text-2xl font-bold text-white">
             Website E-Commerce
           </h2>
