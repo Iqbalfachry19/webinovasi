@@ -8,7 +8,7 @@ function Hero() {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src="/Group-of-business-people-working-in-office.svg"
+              src="/Group-of-business-people-working-in-office.webp"
               alt="Business People"
               fill
               priority
