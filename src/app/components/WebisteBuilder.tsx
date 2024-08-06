@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function WebsiteBuilder() {
   return (
-    <div className="mx-auto flex max-w-[1150px] py-8">
+    <div className="mx-auto flex max-w-[1150px] flex-col py-8 xl:flex-row">
       <Image
         src="/gambar-2.webp"
         alt="Business People"
