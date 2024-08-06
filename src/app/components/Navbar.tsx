@@ -16,11 +16,11 @@ function Navbar() {
       <div className="block lg:hidden">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="text-white focus:outline-none"
+          className="text-black focus:outline-none"
         >
           <svg
             className="h-6 w-6"
-            fill="none"
+            fill="#000000"
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
