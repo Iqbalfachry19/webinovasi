@@ -30,7 +30,15 @@ function WebsiteTypes() {
         </div>
 
         {/* Dibikinin Website Section */}
-        <div className="flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
+        <div className="relative flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
+          <Image
+            src="/Startup-business-spaceship-goals-launch-concept-1.png"
+            alt="Background"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            className="absolute inset-0 z-[-1] rounded-lg"
+          />
           <h2 className="mb-4 text-2xl font-bold text-white">
             Dibikinin Website
           </h2>
@@ -43,7 +51,15 @@ function WebsiteTypes() {
         </div>
 
         {/* Website E-Commerce Section */}
-        <div className="flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
+        <div className="relative flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
+          <Image
+            src="/Startup-business-spaceship-goals-launch-concept-1.png"
+            alt="Background"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            className="absolute inset-0 z-[-1] rounded-lg"
+          />
           <h2 className="mb-4 text-2xl font-bold text-white">
             Website E-Commerce
           </h2>
