@@ -7,17 +7,19 @@ function WebsiteTypes() {
       <h1 className="mb-12 text-center text-4xl font-bold">
         Buat Websitemu Sekarang
       </h1>
-      <div className="flex flex-col space-y-8">
+      <div className="flex flex-col justify-center space-y-8 xl:flex-row xl:space-x-8 xl:space-y-0">
         {/* Website LandingPage Section */}
-        <div className="relative flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
-          <Image
-            src="/Startup-business-spaceship-goals-launch-concept-1.png"
-            alt="Background"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-            className="absolute inset-0 z-[-1] rounded-lg"
-          />
+        <div className="relative flex flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center">
+          <div className="absolute inset-0">
+            <Image
+              src="/Startup-business-spaceship-goals-launch-concept-1.png"
+              alt="Background"
+              fill
+              style={{ objectFit: "cover" }}
+              quality={100}
+              className="absolute inset-0 z-[-1]"
+            />
+          </div>
           <h2 className="mb-4 text-2xl font-bold text-white">
             Website LandingPage
           </h2>
@@ -30,15 +32,17 @@ function WebsiteTypes() {
         </div>
 
         {/* Dibikinin Website Section */}
-        <div className="relative flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
-          <Image
-            src="/Startup-business-spaceship-goals-launch-concept-1.png"
-            alt="Background"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-            className="absolute inset-0 z-[-1] rounded-lg"
-          />
+        <div className="relative flex flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center">
+          <div className="absolute inset-0">
+            <Image
+              src="/Startup-business-spaceship-goals-launch-concept-1.png"
+              alt="Background"
+              fill
+              style={{ objectFit: "cover" }}
+              quality={100}
+              className="absolute inset-0 z-[-1]"
+            />
+          </div>
           <h2 className="mb-4 text-2xl font-bold text-white">
             Dibikinin Website
           </h2>
@@ -51,15 +55,17 @@ function WebsiteTypes() {
         </div>
 
         {/* Website E-Commerce Section */}
-        <div className="relative flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
-          <Image
-            src="/Startup-business-spaceship-goals-launch-concept-1.png"
-            alt="Background"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-            className="absolute inset-0 z-[-1] rounded-lg"
-          />
+        <div className="relative flex flex-col items-center overflow-hidden rounded-lg bg-black/20 p-8 text-center">
+          <div className="absolute inset-0">
+            <Image
+              src="/Startup-business-spaceship-goals-launch-concept-1.png"
+              alt="Background"
+              fill
+              style={{ objectFit: "cover" }}
+              quality={100}
+              className="absolute inset-0 z-[-1]"
+            />
+          </div>
           <h2 className="mb-4 text-2xl font-bold text-white">
             Website E-Commerce
           </h2>
