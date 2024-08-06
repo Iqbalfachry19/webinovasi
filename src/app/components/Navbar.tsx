@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 function Navbar() {
   // State to toggle the mobile menu
@@ -38,12 +39,18 @@ function Navbar() {
 
       {/* Navigation Links */}
       <nav className="hidden space-x-4 lg:flex">
-        <p className="cursor-pointer hover:border-b hover:border-[#5B59C2] hover:text-[#5B59C2]">
+        <Link
+          href="/"
+          className="cursor-pointer hover:border-b hover:border-[#5B59C2] hover:text-[#5B59C2]"
+        >
           Home
-        </p>
-        <p className="cursor-pointer hover:border-b hover:border-[#5B59C2] hover:text-[#5B59C2]">
+        </Link>
+        <Link
+          href="/tema"
+          className="cursor-pointer hover:border-b hover:border-[#5B59C2] hover:text-[#5B59C2]"
+        >
           Tema
-        </p>
+        </Link>
         <p className="cursor-pointer hover:border-b hover:border-[#5B59C2] hover:text-[#5B59C2]">
           Cara Custom Web
         </p>
