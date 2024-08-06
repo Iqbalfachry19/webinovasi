@@ -20,12 +20,13 @@ function WebsiteTypes() {
               className="absolute z-[-1]"
             />
           </div>
-          <div className="absolute bottom-0 flex w-full flex-col items-center bg-black/70 p-4">
-            <div className="flex w-full justify-between">
-              <h2 className="mb-4 text-start text-2xl font-bold text-white">
+          <div className="absolute bottom-0 flex h-20 w-full flex-col items-center bg-black/70 p-4">
+            <div className="flex w-full items-center justify-between">
+              <h2 className="w-22 text-start text-xl font-bold text-white">
                 Website LandingPage
               </h2>
-              <button className="w-40 cursor-pointer rounded bg-[#5B59C2] px-6 text-white transition duration-300 hover:bg-[#6766c3]">
+
+              <button className="h-10 w-40 cursor-pointer items-center justify-center rounded bg-[#5B59C2] px-6 text-white transition duration-300 hover:bg-[#6766c3]">
                 Beli Disini
               </button>
             </div>
@@ -44,13 +45,13 @@ function WebsiteTypes() {
               className="absolute z-[-1]"
             />
           </div>
-          <div className="absolute bottom-0 flex w-full flex-col items-center bg-black/70 p-4">
-            <div className="flex w-full justify-between">
-              <h2 className="mb-4 text-start text-2xl font-bold text-white">
+          <div className="absolute bottom-0 flex h-20 w-full flex-col items-center bg-black/70 p-4">
+            <div className="flex w-full items-center justify-between">
+              <h2 className="w-22 text-start text-xl font-bold text-white">
                 Dibikinin Website
               </h2>
 
-              <button className="w-40 cursor-pointer rounded bg-[#5B59C2] px-6 text-white transition duration-300 hover:bg-[#6766c3]">
+              <button className="h-10 w-40 cursor-pointer items-center justify-center rounded bg-[#5B59C2] px-6 text-white transition duration-300 hover:bg-[#6766c3]">
                 Beli Disini
               </button>
             </div>
@@ -69,13 +70,13 @@ function WebsiteTypes() {
               className="absolute z-[-1]"
             />
           </div>
-          <div className="absolute bottom-0 flex w-full flex-col items-center bg-black/70 p-4">
-            <div className="flex w-full justify-between">
-              <h2 className="mb-4 text-start text-2xl font-bold text-white">
+          <div className="absolute bottom-0 flex h-20 w-full flex-col items-center bg-black/70 p-4">
+            <div className="flex w-full items-center justify-between">
+              <h2 className="w-22 text-start text-xl font-bold text-white">
                 Website E-Commerce
               </h2>
 
-              <button className="w-40 cursor-pointer rounded bg-[#5B59C2] px-6 text-white transition duration-300 hover:bg-[#6766c3]">
+              <button className="h-10 w-40 cursor-pointer items-center justify-center rounded bg-[#5B59C2] px-6 text-white transition duration-300 hover:bg-[#6766c3]">
                 Beli Disini
               </button>
             </div>
