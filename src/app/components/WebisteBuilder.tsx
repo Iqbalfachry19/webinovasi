@@ -8,7 +8,7 @@ function WebsiteBuilder() {
         <Image src="/gambar-2.webp" alt="Business People" fill />
       </div>
 
-      <div className="px-10 py-20">
+      <div className="px-2 py-20 xl:px-10">
         <h1 className="mb-12 w-[20px] text-start text-6xl font-bold md:w-[470px]">
           Bangun Website Sesuai Seleramu
         </h1>
