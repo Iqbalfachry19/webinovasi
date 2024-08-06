@@ -1,14 +1,23 @@
 import React from "react";
+import Image from "next/image";
 
 function WebsiteTypes() {
   return (
-    <div className="mx-auto max-w-[1150px] px-8 py-8">
+    <div className="mx-auto max-w-[1150px] py-8">
       <h1 className="mb-12 text-center text-4xl font-bold">
-        BUAT WEBSITEMU SEKARANG
+        Buat Websitemu Sekarang
       </h1>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col space-y-8">
         {/* Website LandingPage Section */}
-        <div className="flex flex-col items-center rounded-lg bg-black/50 p-8 text-center">
+        <div className="relative flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
+          <Image
+            src="/Startup-business-spaceship-goals-launch-concept-1.png"
+            alt="Background"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            className="absolute inset-0 z-[-1] rounded-lg"
+          />
           <h2 className="mb-4 text-2xl font-bold text-white">
             Website LandingPage
           </h2>
@@ -21,7 +30,7 @@ function WebsiteTypes() {
         </div>
 
         {/* Dibikinin Website Section */}
-        <div className="flex flex-col items-center rounded-lg bg-black/50 p-8 text-center">
+        <div className="flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
           <h2 className="mb-4 text-2xl font-bold text-white">
             Dibikinin Website
           </h2>
@@ -34,7 +43,7 @@ function WebsiteTypes() {
         </div>
 
         {/* Website E-Commerce Section */}
-        <div className="flex flex-col items-center rounded-lg bg-black/50 p-8 text-center">
+        <div className="flex flex-col items-center rounded-lg bg-black/20 p-8 text-center">
           <h2 className="mb-4 text-2xl font-bold text-white">
             Website E-Commerce
           </h2>
