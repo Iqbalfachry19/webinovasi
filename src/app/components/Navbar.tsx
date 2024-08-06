@@ -53,7 +53,7 @@ function Navbar() {
 
       {/* Mobile Menu Button Section */}
       <div
-        className={`fixed left-0 top-0 h-full w-full bg-black/70 lg:hidden ${isOpen ? "block" : "hidden"}`}
+        className={`fixed left-0 top-0 h-full w-full bg-black/70 text-black lg:hidden ${isOpen ? "block" : "hidden"}`}
       >
         <div className="flex h-full flex-col items-center justify-center bg-white">
           <p className="cursor-pointer py-4">Home</p>
