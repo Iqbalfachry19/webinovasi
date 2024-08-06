@@ -21,7 +21,7 @@ function WebsiteBuilder() {
           Dengan Inovasiweb, kamu bisa membangun websitemu sendiri tanpa perlu
           khawatir lagi hasilnya tidak sesuai.
         </p>
-        <button className="block flex py-3 text-xl font-semibold text-black transition duration-300 hover:text-[#6766c3]">
+        <button className="flex py-3 text-xl font-semibold text-black transition duration-300 hover:text-[#6766c3]">
           <p>Bangun Websitemu Sekarang</p>
           <svg
             aria-hidden="true"
