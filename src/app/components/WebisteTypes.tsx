@@ -5,7 +5,7 @@ function WebsiteTypes() {
   return (
     <div className="mx-auto max-w-[1150px] py-8">
       <h1 className="mb-12 text-center text-4xl font-bold">
-        Buat Websitemu Sekarang
+        BUAT WEBSITEMU SEKARANG
       </h1>
       <div className="flex flex-col justify-center space-y-8 px-2 xl:flex-row xl:space-x-8 xl:space-y-0">
         {/* Website LandingPage Section */}
