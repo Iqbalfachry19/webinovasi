@@ -11,7 +11,6 @@ function Hero() {
               src="/Group-of-business-people-working-in-office.webp"
               alt="Business People"
               fill
-              priority
               style={{ objectFit: "cover" }}
               className="bg-blend-overlay"
             />
