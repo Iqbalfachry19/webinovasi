@@ -5,7 +5,7 @@ const Design = () => {
   return (
     <section className="relative flex w-full bg-[#ECF0FB]">
       <div className="z-10 ml-32 flex flex-col items-center justify-center text-start">
-        <h2 className="text-xl xl:text-3xl">
+        <h2 className="text-xl xl:text-4xl">
           &quot;Kalau ngga bisa desain gimana?&quot;
         </h2>
         <p className="text-xl font-bold text-[#5C59C2] xl:text-5xl">
