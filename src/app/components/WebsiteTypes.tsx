@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function WebsiteTypes() {
   return (
-    <div className="mx-auto max-w-[1150px] py-8">
+    <section className="mx-auto max-w-[1150px] py-8">
       <h1 className="mb-12 text-center text-4xl font-bold">
         BUAT WEBSITEMU SEKARANG
       </h1>
@@ -83,7 +83,7 @@ function WebsiteTypes() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

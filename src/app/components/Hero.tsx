@@ -3,7 +3,7 @@ import Image from "next/image";
 function Hero() {
   return (
     <>
-      <div className="relative mx-auto flex max-w-[1150px] flex-col items-center bg-center px-4 sm:px-6 lg:px-8">
+      <section className="relative mx-auto flex max-w-[1150px] flex-col items-center bg-center px-4 sm:px-6 lg:px-8">
         <div className="relative flex w-full flex-col items-center overflow-hidden rounded-2xl bg-black/20 bg-opacity-80 p-4 text-center text-white bg-blend-overlay sm:p-8 lg:p-12">
           {/* Background Image */}
           <div className="absolute inset-0">
@@ -60,7 +60,7 @@ function Hero() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }
