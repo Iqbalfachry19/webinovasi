@@ -3,9 +3,9 @@ import React from "react";
 
 function Portfolio() {
   return (
-    <section className="p-6">
-      <h2 className="mb-6 text-2xl font-bold">
-        Our <span className="text-[#5C59C2]">Portfolio</span>
+    <section className="mx-auto mt-20 max-w-[1120px] text-center">
+      <h2 className="mb-6 text-4xl font-bold">
+        OUR <span className="text-[#5C59C2]">PORTFOLIO</span>
       </h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {/* Example items */}

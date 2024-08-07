@@ -1,10 +1,10 @@
-// components/DesignSection.js
 import React from "react";
 import Image from "next/image";
+
 const Design = () => {
   return (
-    <section className="flex w-full bg-[#ECF0FB]">
-      <div className="ml-32 flex flex-col items-center justify-center text-start">
+    <section className="relative flex w-full bg-[#ECF0FB]">
+      <div className="z-10 ml-32 flex flex-col items-center justify-center text-start">
         <h2 className="text-xl xl:text-3xl">
           &quot;Kalau ngga bisa desain gimana?&quot;
         </h2>
@@ -23,7 +23,7 @@ const Design = () => {
           </svg>
         </button>
       </div>
-      <div className="relative h-[600px] w-full rounded-xl md:ml-24 md:h-[380px] md:w-[310px] xl:h-[600px] xl:w-full xl:bg-contain">
+      <div className="relative z-30 h-[600px] w-full rounded-xl md:ml-24 md:h-[380px] md:w-[310px] xl:h-[600px] xl:w-full xl:bg-contain">
         <Image
           src="/Frame-32442.webp"
           alt="Business People"
@@ -31,6 +31,7 @@ const Design = () => {
           fill
         />
       </div>
+      <div className="absolute bottom-[-40px] left-1/2 z-20 h-28 w-[1100px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg"></div>
     </section>
   );
 };
