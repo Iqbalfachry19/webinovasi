@@ -5,7 +5,7 @@ import WebsiteBuilderSection from "./components/WebisteBuilder";
 import Design from "./components/Design";
 import Portfolio from "./components/Portfolio";
 import Alasan from "./components/Alasan";
-import Fitur from "./components/FItur";
+import Fitur from "./components/Fitur";
 import Artikel from "./components/Artikel";
 
 export default function Home() {
