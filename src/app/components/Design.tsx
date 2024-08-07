@@ -8,10 +8,10 @@ const Design = () => {
         <h2 className="text-xl xl:text-3xl">
           &quot;Kalau ngga bisa desain gimana?&quot;
         </h2>
-        <p className="text-xl font-bold text-[#5C59C2] xl:text-4xl">
+        <p className="text-xl font-bold text-[#5C59C2] xl:text-5xl">
           Tenang, Kita Sediain Berbagai Tema Kok?
         </p>
-        <button className="group mt-2 flex self-start rounded-full bg-white px-4 py-2 pt-2 text-base text-black duration-150 hover:bg-[#5B59C2] hover:text-white sm:px-6 sm:py-3 sm:text-lg md:px-8 md:py-4 md:text-xl">
+        <button className="group mt-2 flex self-start rounded-full bg-[#1e1e1e] px-4 py-2 pt-2 text-base text-white duration-150 hover:bg-[#5B59C2] hover:text-white sm:px-6 sm:py-3 sm:text-lg md:px-8 md:py-4 md:text-xl">
           Konsul Aja Dulu
           <svg
             aria-hidden="true"
