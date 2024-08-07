@@ -2,7 +2,8 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import WebsiteTypes from "./components/WebsiteTypes";
 import WebsiteBuilderSection from "./components/WebisteBuilder";
-import DesignSection from "./components/Design";
+import Design from "./components/Design";
+import Portfolio from "./components/Portfolio";
 
 export default function Home() {
   return (
@@ -11,7 +12,8 @@ export default function Home() {
       <Hero />
       <WebsiteTypes />
       <WebsiteBuilderSection />
-      <DesignSection />
+      <Design />
+      <Portfolio />
     </main>
   );
 }
