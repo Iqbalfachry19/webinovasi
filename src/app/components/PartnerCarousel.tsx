@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive"; // Import the hook
 
 const PartnerCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemWidth, setItemWidth] = useState(71); // Default to desktop size
   const delay = 5000; // 5 seconds
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -23,9 +24,13 @@ const PartnerCarousel = () => {
 
   const itemsToShow = partners.length; // Number of logos shown at once
 
-  // Determine the item width based on screen size
+  // Use media query to determine screen size
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" }); // Adjust the breakpoint as needed
-  const itemWidth = isMobile ? 130 / itemsToShow : 71 / itemsToShow; // Use different width percentages for mobile
+
+  useEffect(() => {
+    // Set the item width based on the screen size
+    setItemWidth(isMobile ? 130 / itemsToShow : 71 / itemsToShow);
+  }, [isMobile, itemsToShow]);
 
   const resetTimeout = () => {
     if (timeoutRef.current) {
