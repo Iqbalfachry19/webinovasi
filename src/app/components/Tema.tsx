@@ -62,6 +62,7 @@ function Tema() {
             </div>
             <Link
               href={item.href}
+              aria-label="View Theme"
               className="flex h-12 w-12 items-center justify-center rounded-xl bg-black p-4 text-white shadow-md" // Adjust container size and center
             >
               <LogoEyeSVG />
