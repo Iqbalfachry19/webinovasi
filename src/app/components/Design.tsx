@@ -5,7 +5,7 @@ import PartnerCarousel from "./PartnerCarousel";
 
 const Design = () => {
   return (
-    <section className="relative flex w-full flex-col bg-[#ECF0FB] pt-10 xl:flex-row">
+    <section className="relative flex h-[400px] w-full flex-col bg-[#ECF0FB] pt-10 xl:flex-row">
       <div className="z-10 ml-32 flex flex-col items-center justify-center text-start">
         <h2 className="text-xl xl:text-4xl">
           &quot;Kalau ngga bisa desain gimana?&quot;
@@ -33,7 +33,7 @@ const Design = () => {
           fill
         />
       </div>
-      <div className="absolute bottom-[-60px] left-1/2 z-20 w-[350px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg sm:bottom-[-60px] sm:w-[600px] xl:bottom-[-80px] xl:w-[1100px]">
+      <div className="absolute bottom-[-140px] left-1/2 z-20 w-[300px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg sm:bottom-[-60px] sm:w-[600px] xl:bottom-[-80px] xl:w-[1100px]">
         <PartnerCarousel />
       </div>
     </section>

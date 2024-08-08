@@ -2,7 +2,7 @@ import React from "react";
 
 function Alasan() {
   return (
-    <section className="relative mt-20 flex h-[800px] flex-col items-center bg-[#ECF0FB] xl:h-[700px] xl:w-[800px] xl:flex-row">
+    <section className="relative mt-20 flex h-[1300px] flex-col items-center bg-[#ECF0FB] xl:h-[700px] xl:w-[800px] xl:flex-row">
       <div className="mt-20 w-full xl:ml-28 xl:w-[500px] xl:pr-32">
         <p className="text-center text-2xl font-bold xl:text-end xl:text-7xl">
           ALASAN <span className="text-[#5C59C2]">BISNISMU</span> HARUS PUNYA
