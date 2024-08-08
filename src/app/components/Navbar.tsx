@@ -8,7 +8,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="sticky top-0 z-50 flex items-center justify-between bg-white px-40 py-4">
+    <div className="sticky top-0 z-50 flex items-center justify-between bg-white p-2 py-4 xl:px-40">
       <div className="flex items-center">
         <Image width={300} height={50} src="/Logo-Inovasi-Web.svg" alt="Logo" />
       </div>
