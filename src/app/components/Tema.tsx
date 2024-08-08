@@ -46,7 +46,7 @@ function Tema() {
         },
       ].map((item, index) => (
         <div className="flex flex-col" key={index}>
-          <div className="relative z-30 h-[400px] w-full md:h-[380px] md:w-[310px] xl:h-[200px] xl:w-full">
+          <div className="relative z-30 h-[250px] w-full md:h-[380px] md:w-[310px] xl:h-[200px] xl:w-full">
             <Image
               src={item.src}
               alt={item.alt}
