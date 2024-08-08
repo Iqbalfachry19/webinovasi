@@ -39,7 +39,7 @@ const PartnerCarousel = () => {
     return () => {
       resetTimeout();
     };
-  }, [currentIndex]);
+  }, [currentIndex, partners.length]);
 
   return (
     <div className="relative h-40 w-full overflow-hidden">
