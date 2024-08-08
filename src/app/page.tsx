@@ -11,7 +11,6 @@ import Artikel from "./components/Artikel";
 export default function Home() {
   return (
     <main>
-      <Navbar />
       <Hero />
       <WebsiteTypes />
       <WebsiteBuilderSection />
