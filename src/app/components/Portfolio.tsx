@@ -3,7 +3,7 @@ import React from "react";
 
 function Portfolio() {
   return (
-    <section className="mx-auto mt-20 max-w-[1120px] text-center">
+    <section className="mx-auto mt-24 max-w-[1120px] text-center">
       <h2 className="mb-6 text-4xl font-bold">
         OUR <span className="text-[#5C59C2]">PORTFOLIO</span>
       </h2>

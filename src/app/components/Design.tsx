@@ -1,5 +1,7 @@
+// components/Design.js
 import React from "react";
 import Image from "next/image";
+import PartnerCarousel from "./PartnerCarousel";
 
 const Design = () => {
   return (
@@ -15,7 +17,7 @@ const Design = () => {
           Konsul Aja Dulu
           <svg
             aria-hidden="true"
-            className="ml-2 h-4 w-4 fill-current text-black duration-150 group-hover:text-white sm:h-5 sm:w-5 md:h-6 md:w-6"
+            className="ml-2 h-4 w-4 fill-current text-white duration-150 group-hover:text-white sm:h-5 sm:w-5 md:h-6 md:w-6"
             viewBox="0 0 448 512"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -31,7 +33,9 @@ const Design = () => {
           fill
         />
       </div>
-      <div className="absolute bottom-[-40px] left-1/2 z-20 h-28 w-[1100px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg"></div>
+      <div className="absolute bottom-[-70px] left-1/2 z-20 w-[1100px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg">
+        <PartnerCarousel />
+      </div>
     </section>
   );
 };
