@@ -9,10 +9,52 @@ function Alasan() {
           WEBSITE
         </p>
       </div>
-      <div className="absolute bottom-[400px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg"></div>
+      <div className="absolute bottom-[400px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg">
+        <div className="flex">
+          <p className="text-6xl">01</p>
+          <div>
+            <p className="text-2xl font-bold text-[#5C59C2]">
+              Meningkatkan Kredibilitas
+            </p>
+            <p>
+              Website yang profesional dan informatif meningkatkan rasa percaya
+              customer. Ini menunjukkan bahwa bisnis kamu serius dan
+              berkomitmen.
+            </p>
+          </div>
+        </div>
+      </div>
 
-      <div className="absolute bottom-[250px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg"></div>
-      <div className="absolute bottom-[100px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg"></div>
+      <div className="absolute bottom-[250px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg">
+        <div className="flex">
+          <p className="text-6xl">02</p>
+          <div>
+            <p className="text-2xl font-bold text-[#5C59C2]">
+              Target pasar lebih luas
+            </p>
+            <p>
+              Kalau selama ini jangkauan bisnis kamu cuma sebatas daerah
+              Pekanbaru, melalui website, kamu jadi bisa menjangkau pasar
+              internasional.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="absolute bottom-[100px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg">
+        <div className="flex">
+          <p className="text-6xl">03</p>
+          <div>
+            <p className="text-2xl font-bold text-[#5C59C2]">
+              Menampilkan Detail Produk /Jasa Bisnismu
+            </p>
+            <p>
+              Website memungkinkan pelanggan melihat informasi lengkap tentang
+              produk atau jasa kamu, termasuk deskripsi, harga, dan cara
+              pembelian.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
