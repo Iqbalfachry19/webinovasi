@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { useMediaQuery } from "react-responsive"; // Import the hook
 
 const PartnerCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,7 +22,10 @@ const PartnerCarousel = () => {
   const partnersExtended = [...partners, ...partners];
 
   const itemsToShow = partners.length; // Number of logos shown at once
-  const itemWidth = 71 / itemsToShow; // Width percentage of each logo
+
+  // Determine the item width based on screen size
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" }); // Adjust the breakpoint as needed
+  const itemWidth = isMobile ? 130 / itemsToShow : 71 / itemsToShow; // Use different width percentages for mobile
 
   const resetTimeout = () => {
     if (timeoutRef.current) {
