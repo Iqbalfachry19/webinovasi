@@ -18,7 +18,10 @@ const PartnerCarousel = () => {
   ];
 
   // Duplicate partners array to create a looping effect
-  const partnersExtended = [...partners, ...partners, ...partners];
+  const partnersExtended = [...partners, ...partners];
+
+  const itemsToShow = partners.length; // Number of logos shown at once
+  const itemWidth = 71 / itemsToShow; // Width percentage of each logo
 
   const resetTimeout = () => {
     if (timeoutRef.current) {
@@ -29,32 +32,29 @@ const PartnerCarousel = () => {
   useEffect(() => {
     resetTimeout();
     timeoutRef.current = setTimeout(
-      () =>
-        setCurrentIndex((prevIndex) =>
-          prevIndex === partners.length - 1 ? 0 : prevIndex + 1,
-        ),
+      () => setCurrentIndex((prevIndex) => (prevIndex + 1) % partners.length),
       delay,
     );
 
     return () => {
       resetTimeout();
     };
-  }, [currentIndex, partners.length]);
+  }, [currentIndex]);
 
   return (
     <div className="relative h-40 w-full overflow-hidden">
       <div
         className="flex transition-transform duration-1000 ease-in-out"
         style={{
-          transform: `translateX(${-currentIndex * (100 / partners.length)}%)`,
-          width: `${(100 * partnersExtended.length) / partners.length}%`,
+          transform: `translateX(${-currentIndex * itemWidth}%)`,
+          width: `${itemWidth * partnersExtended.length}%`,
         }}
       >
         {partnersExtended.map((partner) => (
           <div
             key={partner.id}
             className="flex h-full flex-shrink-0 items-center justify-center"
-            style={{ width: `${100 / partnersExtended.length}%` }}
+            style={{ width: `${itemWidth}%` }}
           >
             <Image
               src={partner.src}
