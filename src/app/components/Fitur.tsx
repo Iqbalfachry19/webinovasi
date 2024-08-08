@@ -3,19 +3,19 @@ import Image from "next/image";
 
 function Fitur() {
   return (
-    <section className="flex items-center bg-[#1e1e1e] py-20 pl-[200px]">
-      <div className="flex flex-col">
-        <div className="relative mr-20 h-[20px] w-full rounded-xl md:ml-24 md:h-[380px] md:w-[310px] xl:h-[300px] xl:w-80 xl:bg-contain">
+    <section className="flex items-center bg-[#1e1e1e] py-20 pl-[100px]">
+      <div className="flex h-[600px] flex-col space-y-10">
+        <div className="relative mr-20 h-[20px] rounded-xl md:ml-24 md:h-[380px] md:w-[600px] xl:h-[500px] xl:w-[450px]">
           <Image
-            src="/Frame-32442.webp"
+            src="/Frame-3227.png"
             alt="Business People"
             style={{ objectFit: "contain" }}
             fill
           />
         </div>
-        <div className="relative mr-20 h-[20px] w-full rounded-xl md:ml-24 md:h-[380px] md:w-[310px] xl:h-[300px] xl:w-80 xl:bg-contain">
+        <div className="relative mr-20 h-[20px] w-full rounded-xl md:ml-24 md:h-[380px] md:w-[310px] xl:h-[500px] xl:w-[450px]">
           <Image
-            src="/Frame-32442.webp"
+            src="/Frame-3226.png"
             alt="Business People"
             style={{ objectFit: "contain" }}
             fill
@@ -23,7 +23,7 @@ function Fitur() {
         </div>
       </div>
       <div className="flex flex-col">
-        <h2 className="w-[400px] text-6xl font-normal text-white">
+        <h2 className="w-[490px] text-7xl font-normal text-white">
           Kenapa Inovasiweb solusi terbaik untuk bisnismu
         </h2>
         <button className="group mt-10 flex self-start rounded-full bg-white px-4 py-2 pt-2 text-base text-black duration-150 hover:bg-[#5B59C2] hover:text-white sm:px-6 sm:py-3 sm:text-lg md:px-8 md:py-4 md:text-xl">

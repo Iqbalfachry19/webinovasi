@@ -10,8 +10,8 @@ function Alasan() {
         </p>
       </div>
       <div className="absolute bottom-[400px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg">
-        <div className="flex">
-          <p className="text-6xl">01</p>
+        <div className="flex p-5">
+          <p className="mr-2 text-6xl">01</p>
           <div>
             <p className="text-2xl font-bold text-[#5C59C2]">
               Meningkatkan Kredibilitas
@@ -26,8 +26,8 @@ function Alasan() {
       </div>
 
       <div className="absolute bottom-[250px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg">
-        <div className="flex">
-          <p className="text-6xl">02</p>
+        <div className="flex p-5">
+          <p className="mr-2 text-6xl">02</p>
           <div>
             <p className="text-2xl font-bold text-[#5C59C2]">
               Target pasar lebih luas
@@ -41,8 +41,8 @@ function Alasan() {
         </div>
       </div>
       <div className="absolute bottom-[100px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg">
-        <div className="flex">
-          <p className="text-6xl">03</p>
+        <div className="flex p-5">
+          <p className="mr-2 text-6xl">03</p>
           <div>
             <p className="text-2xl font-bold text-[#5C59C2]">
               Menampilkan Detail Produk /Jasa Bisnismu
