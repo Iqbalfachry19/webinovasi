@@ -5,7 +5,7 @@ function Fitur() {
   return (
     <section className="flex flex-col items-center bg-[#1e1e1e] py-20 xl:flex-row xl:pl-[100px]">
       <div className="flex h-[400px] flex-col space-y-10 xl:h-[600px]">
-        <div className="xl;mr-20 relative h-[400px] w-[400px] rounded-xl md:ml-24 md:h-[380px] md:w-[600px] xl:h-[500px] xl:w-[450px]">
+        <div className="relative h-[400px] w-[380px] rounded-xl md:ml-24 md:h-[380px] md:w-[600px] xl:mr-20 xl:h-[500px] xl:w-[450px]">
           <Image
             src="/Frame-3227.png"
             alt="Business People"
@@ -13,7 +13,7 @@ function Fitur() {
             fill
           />
         </div>
-        <div className="relative h-[400px] w-[400px] rounded-xl md:ml-24 md:h-[380px] md:w-[310px] xl:mr-20 xl:h-[500px] xl:w-[450px]">
+        <div className="relative h-[400px] w-[380px] rounded-xl md:ml-24 md:h-[380px] md:w-[310px] xl:mr-20 xl:h-[500px] xl:w-[450px]">
           <Image
             src="/Frame-3226.png"
             alt="Business People"
@@ -23,7 +23,7 @@ function Fitur() {
         </div>
       </div>
       <div className="flex flex-col">
-        <h2 className="h-[240px] w-[300px] text-5xl font-normal text-white xl:h-[400px] xl:w-[490px] xl:text-7xl">
+        <h2 className="h-[270px] w-[300px] pt-10 text-5xl font-normal text-white xl:h-[400px] xl:w-[490px] xl:text-7xl">
           Kenapa Inovasiweb solusi terbaik untuk bisnismu
         </h2>
         <button className="group mt-10 flex items-center self-start rounded-full bg-white px-4 py-2 pt-2 text-base text-black duration-150 hover:bg-[#5B59C2] hover:text-white sm:px-6 sm:py-3 sm:text-lg md:px-8 md:py-4 md:text-xl">
