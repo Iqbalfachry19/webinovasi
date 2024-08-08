@@ -11,6 +11,9 @@ function page() {
       <p className="text-center text-4xl">
         Saatnya Bangun Website Untuk Bisnismu Dengan Berbagai Tema Yang Menarik
       </p>
+      <p className="text-center">
+        Pilih salah satu tema dibawah ini untuk mulai membangun websitemu
+      </p>
       <Tema />
     </div>
   );
