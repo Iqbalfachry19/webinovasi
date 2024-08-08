@@ -1,4 +1,5 @@
 import React from "react";
+import Tema from "../components/Tema";
 
 function page() {
   return (
