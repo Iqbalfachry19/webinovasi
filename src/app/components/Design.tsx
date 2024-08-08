@@ -5,8 +5,8 @@ import PartnerCarousel from "./PartnerCarousel";
 
 const Design = () => {
   return (
-    <section className="relative flex h-[400px] w-full flex-col bg-[#ECF0FB] pt-10 xl:flex-row">
-      <div className="z-10 ml-32 flex flex-col items-center justify-center text-start">
+    <section className="relative flex h-[400px] w-full flex-col bg-[#ECF0FB] pt-10 xl:h-[700px] xl:flex-row">
+      <div className="z-10 flex flex-col items-center justify-center text-start xl:ml-32">
         <h2 className="text-xl xl:text-4xl">
           &quot;Kalau ngga bisa desain gimana?&quot;
         </h2>
