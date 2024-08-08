@@ -1,7 +1,11 @@
 import React from "react";
 
 function page() {
-  return <div>page</div>;
+  return (
+    <div>
+      <Tema />
+    </div>
+  );
 }
 
 export default page;
