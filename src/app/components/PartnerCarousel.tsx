@@ -18,7 +18,7 @@ const PartnerCarousel = () => {
   ];
 
   // Duplicate partners array to create a looping effect
-  const partnersExtended = [...partners, ...partners];
+  const partnersExtended = [...partners, ...partners, ...partners];
 
   const resetTimeout = () => {
     if (timeoutRef.current) {
@@ -54,14 +54,14 @@ const PartnerCarousel = () => {
           <div
             key={partner.id}
             className="flex h-full flex-shrink-0 items-center justify-center"
-            style={{ width: `${90 / partners.length}%` }}
+            style={{ width: `${100 / partnersExtended.length}%` }}
           >
             <Image
               src={partner.src}
               alt={partner.alt}
-              width={170}
-              height={100}
-              style={{ objectFit: "cover" }}
+              width={150} // Adjusted width
+              height={80} // Adjusted height
+              style={{ objectFit: "contain" }}
             />
           </div>
         ))}
