@@ -5,7 +5,7 @@ import { LogoEyeSVG } from "./Portfolio";
 
 function Tema() {
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="mb-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       {/* Example items */}
       {[
         {
