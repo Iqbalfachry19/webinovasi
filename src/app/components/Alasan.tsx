@@ -2,14 +2,14 @@ import React from "react";
 
 function Alasan() {
   return (
-    <section className="relative mt-20 flex h-[700px] w-[800px] items-center bg-[#ECF0FB]">
-      <div className="ml-28 mt-20 w-[500px] pr-32">
-        <p className="text-end text-7xl font-bold">
+    <section className="relative mt-20 flex h-[800px] flex-col items-center bg-[#ECF0FB] xl:h-[700px] xl:w-[800px] xl:flex-row">
+      <div className="mt-20 w-full xl:ml-28 xl:w-[500px] xl:pr-32">
+        <p className="text-center text-2xl font-bold xl:text-end xl:text-7xl">
           ALASAN <span className="text-[#5C59C2]">BISNISMU</span> HARUS PUNYA
           WEBSITE
         </p>
       </div>
-      <div className="absolute bottom-[400px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg">
+      <div className="z-20 mx-10 mt-10 transform rounded-lg bg-white shadow-lg xl:absolute xl:bottom-[400px] xl:left-[900px] xl:mx-0 xl:mt-0 xl:h-32 xl:w-[700px] xl:-translate-x-1/2">
         <div className="flex p-5">
           <p className="mr-2 text-6xl">01</p>
           <div>
@@ -25,7 +25,7 @@ function Alasan() {
         </div>
       </div>
 
-      <div className="absolute bottom-[250px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg">
+      <div className="z-20 mx-10 mt-10 transform rounded-lg bg-white shadow-lg xl:absolute xl:bottom-[250px] xl:left-[900px] xl:mx-0 xl:mt-0 xl:h-32 xl:w-[700px] xl:-translate-x-1/2">
         <div className="flex p-5">
           <p className="mr-2 text-6xl">02</p>
           <div>
@@ -40,7 +40,7 @@ function Alasan() {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-[100px] left-[900px] z-20 h-32 w-[700px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg">
+      <div className="z-20 mx-10 mt-10 transform rounded-lg bg-white shadow-lg xl:absolute xl:bottom-[100px] xl:left-[900px] xl:mx-0 xl:mt-0 xl:h-32 xl:w-[700px] xl:-translate-x-1/2">
         <div className="flex p-5">
           <p className="mr-2 text-6xl">03</p>
           <div>

@@ -5,7 +5,7 @@ import PartnerCarousel from "./PartnerCarousel";
 
 const Design = () => {
   return (
-    <section className="relative flex w-full bg-[#ECF0FB]">
+    <section className="relative flex w-full flex-col bg-[#ECF0FB] pt-10 xl:flex-row">
       <div className="z-10 ml-32 flex flex-col items-center justify-center text-start">
         <h2 className="text-xl xl:text-4xl">
           &quot;Kalau ngga bisa desain gimana?&quot;
@@ -13,7 +13,7 @@ const Design = () => {
         <p className="text-xl font-bold text-[#5C59C2] xl:text-5xl">
           Tenang, Kita Sediain Berbagai Tema Kok?
         </p>
-        <button className="group mt-2 flex self-start rounded-full bg-[#1e1e1e] px-4 py-2 pt-2 text-base text-white duration-150 hover:bg-[#5B59C2] hover:text-white sm:px-6 sm:py-3 sm:text-lg md:px-8 md:py-4 md:text-xl">
+        <button className="group mt-2 flex rounded-full bg-[#1e1e1e] px-4 py-2 pt-2 text-base text-white duration-150 hover:bg-[#5B59C2] hover:text-white sm:px-6 sm:py-3 sm:text-lg md:px-8 md:py-4 md:text-xl xl:self-start">
           Konsul Aja Dulu
           <svg
             aria-hidden="true"
@@ -33,7 +33,7 @@ const Design = () => {
           fill
         />
       </div>
-      <div className="absolute bottom-[-80px] left-1/2 z-20 w-[1100px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg">
+      <div className="absolute bottom-[-60px] left-1/2 z-20 -translate-x-1/2 transform rounded-lg bg-white shadow-lg sm:bottom-[-60px] sm:w-[600px] xl:bottom-[-80px] xl:w-[1100px]">
         <PartnerCarousel />
       </div>
     </section>
