@@ -33,7 +33,7 @@ const Design = () => {
           fill
         />
       </div>
-      <div className="absolute bottom-[-140px] left-1/2 z-20 w-[300px] -translate-x-1/2 transform rounded-lg bg-white shadow-lg sm:bottom-[-60px] sm:w-[600px] xl:bottom-[-80px] xl:w-[1100px]">
+      <div className="absolute bottom-[-140px] left-1/2 z-20 w-[300px] -translate-x-1/2 transform bg-white shadow-lg sm:bottom-[-60px] sm:w-[600px] xl:bottom-[-80px] xl:w-[1100px] xl:rounded-lg">
         <PartnerCarousel />
       </div>
     </section>

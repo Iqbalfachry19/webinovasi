@@ -87,15 +87,27 @@ function Navbar() {
               />
             </svg>
           </button>
-          <p className="cursor-pointer py-4" onClick={() => setIsOpen(false)}>
+          <Link
+            href="/"
+            className="cursor-pointer py-4"
+            onClick={() => setIsOpen(false)}
+          >
             Home
-          </p>
-          <p className="cursor-pointer py-4" onClick={() => setIsOpen(false)}>
+          </Link>
+          <Link
+            href="/tema"
+            className="cursor-pointer py-4"
+            onClick={() => setIsOpen(false)}
+          >
             Tema
-          </p>
-          <p className="cursor-pointer py-4" onClick={() => setIsOpen(false)}>
+          </Link>
+          <Link
+            onClick={() => setIsOpen(false)}
+            href="/"
+            className="cursor-pointer py-4"
+          >
             Cara Custom Web
-          </p>
+          </Link>
           <button className="mt-4 rounded bg-[#5B59C2] px-4 py-2 text-white hover:bg-[#6766c3]">
             Kontak Kami
           </button>
