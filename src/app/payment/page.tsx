@@ -31,7 +31,7 @@ const Home = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:8080/check-domain?domain=${encodeURIComponent(domain)}`,
+          `https://app.webinovasi.com/check-domain?domain=${encodeURIComponent(domain)}`,
         );
         if (response.ok) {
           const data = await response.json();
@@ -69,7 +69,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/get-snap-token");
+      const response = await fetch("https://app.webinovasi.com/get-snap-token");
       const data = await response.json();
       if (data.token) {
         window.snap.pay(data.token, {
