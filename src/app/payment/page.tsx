@@ -214,9 +214,12 @@ const Home = () => {
             <h2 className="text-lg font-bold">Order Summary</h2>
             <p>Domain: {domain}</p>
             {domainPrice && (
-              <p className="text-green-500">
-                Domain Price: Rp. {domainPrice} / 1st Year
-              </p>
+              <>
+                <p className="text-green-500">
+                  Domain Price: Rp. {domainPrice} / 1st Year
+                </p>
+                <p className="text-red-500 line-through">Rp 245.000</p>
+              </>
             )}
             <p className="mt-2 text-green-500">
               Hosting Package: {hostingPackage}
