@@ -216,7 +216,7 @@ const Home = () => {
             {domainPrice && (
               <>
                 <p className="text-green-500">
-                  Domain Price: Rp. {domainPrice} / 1st Year
+                  Domain Price: {domainPrice} / 1st Year
                 </p>
                 <p className="text-red-500 line-through">Rp 245.000</p>
               </>
