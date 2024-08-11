@@ -10,24 +10,25 @@ const Home = () => {
   const [apiCheckError, setApiCheckError] = useState("");
   const [domain, setDomain] = useState("");
   const [domainRecommendations, setDomainRecommendations] = useState([]);
-  const [domainPrice, setDomainPrice] = useState(""); // State to store domain price
-  const [selectedTheme, setSelectedTheme] = useState("default"); // State to store selected theme
-  const [hostingPackage, setHostingPackage] = useState("1-year"); // State to store hosting package
-  const [hostingPrice, setHostingPrice] = useState(700000); // State to store hosting price
-  const [themePrice] = useState(900000); // State to store theme price
+  const [domainPrice, setDomainPrice] = useState("");
+  const [selectedTheme, setSelectedTheme] = useState("default");
+  const [hostingPackage, setHostingPackage] = useState("1-year");
+  const [hostingPrice, setHostingPrice] = useState(700000);
+  const [themePrice] = useState(900000);
+  const [name, setName] = useState(""); // State to store user name
+  const [email, setEmail] = useState(""); // State to store user email
+  const [address, setAddress] = useState(""); // State to store user address
+  const [whatsapp, setWhatsapp] = useState(""); // State to store WhatsApp number
 
-  // Load theme from localStorage on component mount
   useEffect(() => {
     const savedTheme = localStorage.getItem("selectedTheme") || "default";
     setSelectedTheme(savedTheme);
   }, []);
 
-  // Apply theme to body class
   useEffect(() => {
-    document.body.className = selectedTheme; // Apply the selected theme to the body
+    document.body.className = selectedTheme;
   }, [selectedTheme]);
 
-  // Update hosting price based on selected package
   useEffect(() => {
     switch (hostingPackage) {
       case "1-year":
@@ -70,14 +71,14 @@ const Home = () => {
           const data = await response.json();
           if (data.message === "Domain is available") {
             setIsApiAvailable(true);
-            setDomainRecommendations([]); // Clear recommendations if domain is available
+            setDomainRecommendations([]);
             setApiCheckError("");
-            setDomainPrice(data.price || ""); // Set the price if available
+            setDomainPrice(data.price || "");
           } else {
             setIsApiAvailable(false);
             setApiCheckError(data.message);
-            setDomainRecommendations(data.recommendations || []); // Update recommendations from API
-            setDomainPrice(""); // Clear the price if domain is not available
+            setDomainRecommendations(data.recommendations || []);
+            setDomainPrice("");
           }
         } else {
           setApiCheckError("API domain is not available.");
@@ -103,7 +104,11 @@ const Home = () => {
       return;
     }
 
-    // Calculate the total price
+    if (!name || !email || !address || !whatsapp) {
+      alert("Please fill in all required fields before proceeding.");
+      return;
+    }
+
     const totalPrice =
       hostingPrice +
       themePrice +
@@ -117,7 +122,13 @@ const Home = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ totalPrice }), // Include totalPrice in the request body
+          body: JSON.stringify({
+            totalPrice,
+            name,
+            email,
+            address,
+            whatsapp,
+          }),
         },
       );
 
@@ -126,6 +137,7 @@ const Home = () => {
         window.snap.pay(data.token, {
           onSuccess: function (result: any) {
             setResultJson(JSON.stringify(result, null, 2));
+            sendWhatsAppMessage(result);
           },
           onPending: function (result: any) {
             setResultJson(JSON.stringify(result, null, 2));
@@ -140,6 +152,12 @@ const Home = () => {
     } catch (error) {
       console.error("Error:", error);
     }
+  };
+
+  const sendWhatsAppMessage = (paymentResult: any) => {
+    const message = `Hi ${name}, your payment was successful. Details: ${JSON.stringify(paymentResult, null, 2)}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${encodeURIComponent(whatsapp)}&text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -164,13 +182,76 @@ const Home = () => {
 
       <div className="mb-4">
         <label
+          htmlFor="name"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Name:
+        </label>
+        <input
+          id="name"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Email:
+        </label>
+        <input
+          id="email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label
+          htmlFor="address"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Address:
+        </label>
+        <input
+          id="address"
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label
+          htmlFor="whatsapp"
+          className="block text-sm font-medium text-gray-700"
+        >
+          WhatsApp Number:
+        </label>
+        <input
+          id="whatsapp"
+          type="text"
+          value={whatsapp}
+          onChange={(e) => setWhatsapp(e.target.value)}
+          className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label
           htmlFor="theme-select"
           className="block text-sm font-medium text-gray-700"
         >
           Selected Theme:
         </label>
-        <p className="mt-1 text-gray-900">{selectedTheme}</p>{" "}
-        {/* Display the selected theme */}
+        <p className="mt-1 text-gray-900">{selectedTheme}</p>
       </div>
 
       <div className="mb-4">
@@ -186,82 +267,50 @@ const Home = () => {
           onChange={(e) => setHostingPackage(e.target.value)}
           className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
         >
-          <option value="1-year">1 Year - Rp. 700.000</option>
-          <option value="2-year">2 Years - Rp. 1.400.000</option>
-          <option value="3-year">3 Years - Rp. 2.100.000</option>
+          <option value="1-year">1 Year - IDR 700.000</option>
+          <option value="2-year">2 Years - IDR 1.400.000</option>
+          <option value="3-year">3 Years - IDR 2.100.000</option>
         </select>
       </div>
 
-      {isLoading ? (
-        <p className="text-gray-500">Loading API status...</p>
-      ) : apiCheckError ? (
-        <div>
-          <p className="text-red-500">{apiCheckError}</p>
-          {domainRecommendations.length > 0 && (
-            <div>
-              <p className="text-gray-700">Here are some recommendations:</p>
-              <ul className="list-disc pl-5">
-                {domainRecommendations.map((rec, index) => (
-                  <li key={index}>{rec}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div>
+      {isLoading && (
+        <div className="my-4 text-sm text-gray-600">Loading...</div>
+      )}
+      {!isLoading && apiCheckError && (
+        <div className="my-4 text-sm text-red-600">{apiCheckError}</div>
+      )}
+      {!isLoading && !apiCheckError && (
+        <>
           <div className="mb-4">
-            <h2 className="text-lg font-bold">Order Summary</h2>
-            <p>Domain: {domain}</p>
-            {domainPrice && (
-              <>
-                <p className="text-green-500">
-                  Domain Price: {domainPrice} / 1st Year
-                </p>
-                <p className="text-red-500 line-through">Rp 245.000</p>
-              </>
-            )}
-            <p className="mt-2 text-green-500">
-              Hosting Package: {hostingPackage}
-            </p>
-            <p className="mt-2 text-green-500">
-              Hosting Price: Rp. {hostingPrice.toLocaleString()}
-            </p>
-            <p className="mt-2 text-green-500">
-              Theme Price: Rp. {themePrice.toLocaleString()}
-            </p>
-            <p className="mt-2 text-green-500">
-              Total: Rp.{" "}
-              {(
-                hostingPrice +
-                themePrice +
-                (domainPrice ? parseInt(domainPrice.replace(/[^0-9]/g, "")) : 0)
-              ).toLocaleString()}
+            <label
+              htmlFor="domain-price"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Domain Price:
+            </label>
+            <p className="mt-1 text-gray-900">
+              {domainPrice}{" "}
+              <span className="text-red-500 line-through">Rp 350.000</span>
             </p>
           </div>
+
           <button
             onClick={handlePayment}
-            disabled={!isSnapLoaded || !isApiAvailable}
-            className={`w-full rounded-md px-4 py-2 text-white shadow-sm ${
-              !isSnapLoaded || !isApiAvailable
-                ? "cursor-not-allowed bg-gray-400"
-                : "bg-[#5B59C2] hover:bg-[#5B59C2]"
-            }`}
+            className="w-full rounded-md bg-[#5B59C2] px-4 py-2 text-white shadow-sm hover:bg-[#5B59C2] focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
+            disabled={!isSnapLoaded}
           >
-            Pay!
+            Pay Now
           </button>
-        </div>
+
+          <pre className="mt-4 max-w-md overflow-auto bg-gray-100 p-2 text-xs text-gray-800">
+            {resultJson}
+          </pre>
+        </>
       )}
-      <pre className="mt-4 rounded-md bg-gray-100 p-4">
-        <div id="result-json">
-          JSON result will appear here after payment:
-          <br />
-          {resultJson}
-        </div>
-      </pre>
+
       <Script
         src="https://app.midtrans.com/snap/snap.js"
-        data-client-key={process.env.NEXT_PUBLIC_SNAP_CLIENT_KEY}
+        data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
         onLoad={() => setIsSnapLoaded(true)}
       />
     </div>
