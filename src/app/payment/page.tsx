@@ -1,7 +1,20 @@
 "use client";
 import { useState, useEffect } from "react";
 import Script from "next/script";
-
+import { client } from "../client";
+import {
+  ConnectButton,
+  useActiveAccount,
+  useActiveWallet,
+  useConnect,
+  useDisconnect,
+} from "thirdweb/react";
+import { toUnits } from "thirdweb/utils";
+import { sepolia } from "thirdweb/chains";
+import { prepareContractCall } from "thirdweb";
+import { getContract } from "thirdweb";
+import { defineChain } from "thirdweb/chains";
+import { useSendTransaction } from "thirdweb/react";
 const Home = () => {
   const [resultJson, setResultJson] = useState("");
   const [isSnapLoaded, setIsSnapLoaded] = useState(false);
@@ -302,6 +315,7 @@ const Home = () => {
           >
             Pay Now
           </button>
+          <CustomAccountFactory />
 
           <pre className="mt-4 max-w-md overflow-auto bg-gray-100 p-2 text-xs text-gray-800">
             {resultJson}
@@ -317,5 +331,45 @@ const Home = () => {
     </div>
   );
 };
-
+export const contract = getContract({
+  client,
+  chain: defineChain(11155111),
+  address: "0x72A6F19203027bB12B6b13B62B394f81b80500b1",
+});
+function CustomAccountFactory() {
+  const { mutate: sendTransaction } = useSendTransaction();
+  const account = useActiveAccount();
+  const connectedWallet = useActiveWallet();
+  return (
+    <div className="mb-20 flex flex-col items-center md:mb-20">
+      <p className="mb-4 text-base md:mb-4">Connect to blockchain to pay</p>
+      <ConnectButton
+        client={client}
+        accountAbstraction={{
+          factoryAddress: "0x72A5036fbc091E0160FA4d9275D583710c9F1815",
+          chain: sepolia,
+          sponsorGas: true,
+        }}
+      />
+      {account && connectedWallet ? (
+        <button
+          className="mt-2 w-full rounded-md bg-[#5B59C2] px-4 py-2 text-white shadow-sm hover:bg-[#5B59C2] focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
+          onClick={() => {
+            const transaction = prepareContractCall({
+              contract,
+              method:
+                "function addData(int256 temperature, int256 humidity, int256 pressure) public",
+              params: [toUnits("12", 0), toUnits("12", 0), toUnits("12", 0)],
+            });
+            sendTransaction(transaction);
+          }}
+        >
+          Pay with blockchain Now
+        </button>
+      ) : (
+        <></>
+      )}
+    </div>
+  );
+}
 export default Home;
