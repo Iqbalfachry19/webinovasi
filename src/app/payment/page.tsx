@@ -289,7 +289,7 @@ const Home = () => {
               Domain Price:
             </label>
             <p className="mt-1 text-gray-900">
-              {domainPrice}{" "}
+              {domainPrice} / 1 tahun
               <span className="text-red-500 line-through">Rp 350.000</span>
             </p>
           </div>
