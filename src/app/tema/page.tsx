@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 function page() {
   return (
     <div className="mx-auto mt-24 max-w-[1120px] text-center">
-      <p className="mx-auto w-[760px] text-center text-4xl font-semibold">
+      <p className="text-center text-4xl font-semibold xl:mx-auto xl:w-[760px]">
         Saatnya Bangun Website Untuk Bisnismu Dengan Berbagai Tema Yang Menarik
       </p>
       <p className="pb-10 text-center">
