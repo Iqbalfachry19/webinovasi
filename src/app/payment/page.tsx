@@ -331,7 +331,7 @@ const Home = () => {
     </div>
   );
 };
-export const contract = getContract({
+const contract = getContract({
   client,
   chain: defineChain(11155111),
   address: "0x72A6F19203027bB12B6b13B62B394f81b80500b1",
