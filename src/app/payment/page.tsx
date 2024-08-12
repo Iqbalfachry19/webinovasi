@@ -180,7 +180,7 @@ const Home = () => {
       <div className="mb-4">
         <input
           type="text"
-          placeholder="Enter domain"
+          placeholder="Masukkan domain"
           value={domain}
           onChange={(e) => setDomain(e.target.value)}
           className="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
@@ -198,14 +198,15 @@ const Home = () => {
           htmlFor="name"
           className="block text-sm font-medium text-gray-700"
         >
-          Name:
+          Nama:
         </label>
         <input
+          placeholder="Masukkan Nama"
           id="name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
+          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
         />
       </div>
 
@@ -217,11 +218,12 @@ const Home = () => {
           Email:
         </label>
         <input
+          placeholder="Masukkan Email"
           id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
+          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
         />
       </div>
 
@@ -230,14 +232,15 @@ const Home = () => {
           htmlFor="address"
           className="block text-sm font-medium text-gray-700"
         >
-          Address:
+          Alamat:
         </label>
         <input
+          placeholder="Masukkan Alamat"
           id="address"
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-          className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
+          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
         />
       </div>
 
@@ -249,11 +252,12 @@ const Home = () => {
           WhatsApp Number:
         </label>
         <input
+          placeholder="Masukkan Nomor WhatsApp"
           id="whatsapp"
           type="text"
           value={whatsapp}
           onChange={(e) => setWhatsapp(e.target.value)}
-          className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
+          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
         />
       </div>
 
