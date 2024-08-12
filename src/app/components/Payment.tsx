@@ -11,7 +11,7 @@ import {
 } from "thirdweb/react";
 import { toUnits } from "thirdweb/utils";
 import { sepolia } from "thirdweb/chains";
-import { prepareContractCall } from "thirdweb";
+import { prepareContractCall, prepareTransaction, toWei } from "thirdweb";
 import { getContract } from "thirdweb";
 import { defineChain } from "thirdweb/chains";
 import { useSendTransaction } from "thirdweb/react";
@@ -336,11 +336,11 @@ function Payment() {
     </div>
   );
 }
-const contract = getContract({
-  client,
-  chain: defineChain(11155111),
-  address: "0x72A6F19203027bB12B6b13B62B394f81b80500b1",
-});
+// const contract = getContract({
+//   client,
+//   chain: defineChain(11155111),
+//   address: "0x72A6F19203027bB12B6b13B62B394f81b80500b1",
+// });
 function CustomAccountFactory() {
   const { mutate: sendTransaction } = useSendTransaction();
   const account = useActiveAccount();
@@ -360,12 +360,21 @@ function CustomAccountFactory() {
         <button
           className="mt-2 w-full rounded-md bg-[#5B59C2] px-4 py-2 text-white shadow-sm hover:bg-[#5B59C2] focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
           onClick={() => {
-            const transaction = prepareContractCall({
-              contract,
-              method:
-                "function addData(int256 temperature, int256 humidity, int256 pressure) public",
-              params: [toUnits("12", 0), toUnits("12", 0), toUnits("12", 0)],
+            // const transaction = prepareContractCall({
+            //   contract,
+            //   method:
+            //     "function addData(int256 temperature, int256 humidity, int256 pressure) public",
+            //   params: [toUnits("12", 0), toUnits("12", 0), toUnits("12", 0)],
+            // });
+            // sendTransaction(transaction);
+
+            const transaction = prepareTransaction({
+              client,
+              to: "0x7F9F9B467d839385Fb9d89576d4Ba3deA661Bb52",
+              chain: sepolia,
+              value: toWei("0.001"),
             });
+
             sendTransaction(transaction);
           }}
         >
