@@ -297,6 +297,20 @@ function Payment() {
       {!isLoading && apiCheckError && (
         <div className="my-4 text-sm text-red-600">{apiCheckError}</div>
       )}
+      <div className="mb-4">
+        <h2 className="text-lg font-bold">Domain Recommendations:</h2>
+        <ul>
+          {domainRecommendations.length > 0 ? (
+            domainRecommendations.map((rec, index) => (
+              <li key={index} className="text-gray-700">
+                {rec}
+              </li>
+            ))
+          ) : (
+            <li className="text-gray-700">No recommendations available.</li>
+          )}
+        </ul>
+      </div>
       {!isLoading && !apiCheckError && (
         <>
           <div className="mb-4">
@@ -310,6 +324,28 @@ function Payment() {
               {domainPrice} / 1 tahun
               {""}
               <span className="text-red-500 line-through">Rp 350.000</span>
+            </p>
+          </div>
+          <div className="mb-4">
+            <p className="text-sm font-medium text-gray-700">Total Harga:</p>
+            <p className="text-lg font-bold">
+              Rp{" "}
+              {hostingPrice +
+                themePrice +
+                (domainPrice
+                  ? parseInt(domainPrice.replace(/[^0-9]/g, ""))
+                  : 0)}
+            </p>
+          </div>
+          <div className="mb-4">
+            <p className="text-sm font-medium text-gray-700">Total Harga:</p>
+            <p className="text-lg font-bold">
+              Rp{" "}
+              {hostingPrice +
+                themePrice +
+                (domainPrice
+                  ? parseInt(domainPrice.replace(/[^0-9]/g, ""))
+                  : 0)}
             </p>
           </div>
 
