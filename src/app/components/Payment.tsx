@@ -337,17 +337,6 @@ function Payment() {
                   : 0)}
             </p>
           </div>
-          <div className="mb-4">
-            <p className="text-sm font-medium text-gray-700">Total Harga:</p>
-            <p className="text-lg font-bold">
-              Rp{" "}
-              {hostingPrice +
-                themePrice +
-                (domainPrice
-                  ? parseInt(domainPrice.replace(/[^0-9]/g, ""))
-                  : 0)}
-            </p>
-          </div>
 
           <button
             onClick={handlePayment}
