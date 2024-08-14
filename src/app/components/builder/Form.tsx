@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Forms: React.FC = () => {
+const Form: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -71,4 +71,4 @@ const Forms: React.FC = () => {
   );
 };
 
-export default Forms;
+export default Form;

@@ -8,7 +8,7 @@ interface ImageProps {
 }
 
 const Image: React.FC<ImageProps> = ({
-  src,
+  src = "https://webinovasi.com/wp-content/plugins/elementor/assets/images/placeholder.png",
   alt = "Image",
   width = 640,
   height = 360,

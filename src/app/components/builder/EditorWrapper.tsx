@@ -1,150 +1,323 @@
-"use client";
-
-import { useConfig } from "../../context/ConfigContext"; // Import useConfig
+import { useConfig } from "../../context/ConfigContext";
 import Editor from "./Editor";
 import PropertyPanel from "./PropertyPanel";
 import { useState } from "react";
-import { ChevronLeftIcon } from "@heroicons/react/24/outline"; // Import ChevronLeft from Heroicons
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const EditorWrapper = () => {
-  const { editorEnabled, toggleEditor } = useConfig(); // Access editorEnabled
-  const [components, setComponents] = useState([
-    { id: "1", type: "Container", props: {} }, // Added container
-    { id: "2", type: "Grid", props: { columns: 2, gap: "4" } }, // Added grid
-    { id: "3", type: "Heading", props: { text: "Click me!" } },
-    {
-      id: "4",
-      type: "Image",
-      props: {
-        src: "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci80ODM0ODkwMWE2YjFkNWI5NjM2M2E1N2Y1MDJjMGQyMj9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.kojxaoPVHM36x3algwq_TSKzdiJMeMWozcp4QFVBc0I",
-        width: 104,
-        height: 200,
-      },
-    }, // Updated props to match expected use
-    {
-      id: "5",
-      type: "Text Editor",
-      props: { content: "Hello This Text Editor" },
-    },
-    {
-      id: "6",
-      type: "Video",
-      props: { url: "https://www.youtube.com/watch?v=XHOmBV4js_E" },
-    }, // Updated props to match expected use
-    { id: "7", type: "Button", props: { text: "Click me!" } },
-    { id: "8", type: "Divider", props: { text: "Click me!" } },
-    { id: "9", type: "Spacer", props: {} }, // Added Spacer component
-    {
-      id: "10",
-      type: "Google Map",
-      props: {
-        src: "https://www.google.com/maps/embed/v1/place?q=Eiffel+Tower,+Paris&key=AIzaSyD-1SnzEXAQRIdSU54SWNBBITPe7TcB9v0",
-      },
-    }, // Added Google Map component
-    {
-      id: "11",
-      type: "Icon",
-      props: { icon: "star", size: 24, color: "#260005" },
-    }, // Added Icon component
-    { id: "12", type: "Forms", props: {} }, // Added Forms component
-  ]);
+interface ButtonProps {
+  text?: string;
+}
 
-  const [selectedComponent, setSelectedComponent] = useState<any>(null);
+interface TextEditorProps {
+  content?: string;
+}
+
+interface IconProps {
+  icon?: string;
+  size?: number;
+  color?: string;
+}
+
+interface MediaProps {
+  src?: string;
+  width?: number;
+  height?: number;
+  alt?: string;
+}
+interface HeadingProps {
+  text?: string;
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+}
+interface DividerProps {
+  thickness?: number;
+}
+
+interface SpacerProps {
+  margin?: number;
+}
+
+interface GoogleMapProps {
+  latitude?: number;
+  longitude?: number;
+  zoom?: number;
+  mapType?: string;
+}
+
+interface FormProps {
+  action?: string;
+  method?: string;
+  fields?: string[];
+}
+
+interface ComponentProps {
+  id: string;
+  type: string;
+  props: ButtonProps &
+    TextEditorProps &
+    IconProps &
+    MediaProps &
+    DividerProps &
+    SpacerProps &
+    GoogleMapProps &
+    FormProps &
+    HeadingProps;
+}
+
+const EditorWrapper: React.FC = () => {
+  const { editorEnabled, toggleEditor } = useConfig();
+  const [components, setComponents] = useState<ComponentProps[]>([]);
+  const [selectedComponent, setSelectedComponent] =
+    useState<ComponentProps | null>(null);
+  const [sidebarVisible, setSidebarVisible] = useState(true); // State for sidebar visibility
 
   const onDragEnd = (result: any) => {
-    // Handle drag-and-drop results
+    const { destination, source, draggableId } = result;
+
+    if (!destination) return;
+
+    if (
+      source.droppableId === "editor" &&
+      destination.droppableId === "editor"
+    ) {
+      const reorderedComponents = [...components];
+      const [removed] = reorderedComponents.splice(source.index, 1);
+      reorderedComponents.splice(destination.index, 0, removed);
+      setComponents(reorderedComponents);
+    }
+
+    if (
+      source.droppableId === "sidebar" &&
+      destination.droppableId === "editor"
+    ) {
+      const newComponent = {
+        id: `${components.length + 1}`,
+        type: draggableId,
+        props: {},
+      };
+      const newComponents = [...components];
+      newComponents.splice(destination.index, 0, newComponent);
+      setComponents(newComponents);
+    }
   };
 
-  const handleComponentChange = (id: string, newProps: any) => {
+  const handleComponentChange = (
+    id: string,
+    newProps: Partial<ComponentProps["props"]>,
+  ) => {
     setComponents((prevComponents) =>
-      prevComponents.map((component) =>
-        component.id === id ? { ...component, props: newProps } : component,
+      prevComponents.map((comp) =>
+        comp.id === id
+          ? { ...comp, props: { ...comp.props, ...newProps } }
+          : comp,
       ),
     );
   };
 
-  const handleComponentClick = (id: string) => {
-    const component = components.find((c) => c.id === id);
-    if (component) {
-      setSelectedComponent(component);
+  const onComponentClick = (id: string) => {
+    const clickedComponent = components.find((comp) => comp.id === id) || null;
+    setSelectedComponent(clickedComponent);
+  };
+  const handleClosePropertyPanel = () => {
+    setSelectedComponent(null);
+  };
+
+  const handleComponentClick = (type: string) => {
+    const defaultProps: any = {
+      Button: { text: "Button" },
+      "Text Editor": { content: "Edit this text...", textAlign: "left" },
+      Heading: { text: "Heading", level: 1 },
+      Image: {
+        src: "https://webinovasi.com/wp-content/plugins/elementor/assets/images/placeholder.png",
+        width: 100,
+        height: 100,
+        alt: "Image description",
+      },
+      Video: {
+        src: "https://www.youtube.com/watch?v=XHOmBV4js_E",
+        width: 640,
+        height: 360,
+        alt: "Video description",
+      },
+      Divider: { thickness: 2 },
+      Spacer: { margin: 10 },
+      "Google Map": { latitude: 0, longitude: 0, zoom: 8, mapType: "roadmap" },
+      Icon: { icon: "home", size: 24, color: "#000000" },
+      Form: { action: "", method: "POST", fields: [] },
+    };
+
+    const existingComponent = components.find((comp) => comp.type === type);
+
+    if (!existingComponent) {
+      const newComponent: ComponentProps = {
+        id: `${components.length + 1}`,
+        type: type,
+        props: defaultProps[type] || {},
+      };
+      setComponents((prevComponents) => [...prevComponents, newComponent]);
+      setSelectedComponent(newComponent);
+    } else {
+      setSelectedComponent(existingComponent);
     }
   };
 
-  return (
-    <div className="relative">
-      <button
-        onClick={toggleEditor}
-        className="absolute right-3/4 top-1/2 flex -translate-y-1/2 transform items-center rounded bg-gray-800 p-2 text-white"
-      >
-        <ChevronLeftIcon className="mr-2 h-5 w-5" />
-      </button>
-      {editorEnabled && (
-        <div className="flex">
-          <div className="w-1/4 bg-gray-800 p-4 text-white">
-            <h2 className="mb-4 text-lg font-semibold">Elements</h2>
+  const onAddComponent = (newComponent: ComponentProps) => {
+    setComponents((prevComponents) => [...prevComponents, newComponent]);
+  };
 
-            <h3 className="text-md mt-4 font-semibold">Layout</h3>
-            <ul className="grid grid-cols-2 gap-2">
-              {components
-                .filter(
-                  (component) =>
-                    component.type === "Container" || component.type === "Grid",
-                )
-                .map((component) => (
-                  <li
-                    key={component.id}
-                    className={`mb-2 cursor-pointer rounded p-2 ${selectedComponent?.id === component.id ? "bg-gray-700" : "bg-gray-600"}`}
-                    onClick={() => handleComponentClick(component.id)}
+  const handleSidebarToggle = () => {
+    setSidebarVisible((prev) => !prev);
+  };
+
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="relative flex select-none">
+        <button
+          onClick={handleSidebarToggle} // Toggle sidebar visibility
+          className={`transition-all duration-300 ease-in-out ${
+            sidebarVisible
+              ? "absolute right-3/4 top-1/2 flex -translate-y-1/2 transform items-center rounded bg-gray-800 p-2 text-white"
+              : "absolute left-0 top-1/2 -translate-y-1/2 transform bg-gray-800 p-2 text-white"
+          }`}
+        >
+          {sidebarVisible ? (
+            <ChevronLeftIcon className="h-5 w-5" />
+          ) : (
+            <ChevronRightIcon className="h-5 w-5" />
+          )}
+        </button>
+
+        {editorEnabled && (
+          <div className="flex w-full select-none">
+            {sidebarVisible && (
+              <Droppable droppableId="sidebar" direction="vertical">
+                {(provided) => (
+                  <div
+                    className="w-1/4 select-none bg-gray-800 p-4 text-white"
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
                   >
-                    {component.type}
-                  </li>
-                ))}
-            </ul>
-            <h3 className="text-md font-semibold">Basic</h3>
-            <ul className="grid grid-cols-2 gap-2">
-              {components
-                .filter(
-                  (component) =>
-                    component.type === "Button" ||
-                    component.type === "Text Editor" ||
-                    component.type === "Heading" ||
-                    component.type === "Image" ||
-                    component.type === "Video" ||
-                    component.type === "Divider" ||
-                    component.type === "Spacer" ||
-                    component.type === "Google Map" ||
-                    component.type === "Icon" ||
-                    component.type === "Forms",
-                )
-                .map((component) => (
-                  <li
-                    key={component.id}
-                    className={`mb-2 cursor-pointer rounded p-2 ${selectedComponent?.id === component.id ? "bg-gray-700" : "bg-gray-600"}`}
-                    onClick={() => handleComponentClick(component.id)}
-                  >
-                    {component.type}
-                  </li>
-                ))}
-            </ul>
-          </div>
-          <div className="flex-1 p-4">
+                    <h2 className="mb-4 text-lg font-semibold">Elements</h2>
+                    {/* Sidebar content */}
+                    <h3 className="text-md mt-4 font-semibold">Layout</h3>
+                    <ul className="grid grid-cols-2 gap-2">
+                      {["Container", "Grid"].map((type, index) => (
+                        <Draggable draggableId={type} index={index} key={type}>
+                          {(provided) => (
+                            <li
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              className="mb-2 cursor-grab select-none rounded bg-gray-600 p-2"
+                              onClick={() => handleComponentClick(type)}
+                            >
+                              {type}
+                            </li>
+                          )}
+                        </Draggable>
+                      ))}
+                    </ul>
+                    <h3 className="text-md font-semibold">Basic</h3>
+                    <ul className="grid grid-cols-2 gap-2">
+                      {[
+                        "Button",
+                        "Text Editor",
+                        "Heading",
+                        "Image",
+                        "Video",
+                        "Divider",
+                        "Spacer",
+                        "Google Map",
+                        "Icon",
+                        "Form",
+                      ].map((type, index) => (
+                        <Draggable
+                          draggableId={type}
+                          index={index + 2}
+                          key={type}
+                        >
+                          {(provided) => (
+                            <li
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              className="mb-2 cursor-grab select-none rounded bg-gray-600 p-2"
+                              onClick={() => handleComponentClick(type)}
+                            >
+                              {type}
+                            </li>
+                          )}
+                        </Draggable>
+                      ))}
+                    </ul>
+                    <h3 className="text-md font-semibold">General</h3>
+                    <ul className="grid grid-cols-2 gap-2">
+                      {[
+                        "Image Box",
+                        "Icon Box",
+                        "Image Carousel",
+                        "Basic Gallery",
+                        "Icon List",
+                        "Counter",
+                        "Progress Bar",
+                        "Testimonial",
+                        "Tabs",
+                        "Accordion",
+                        "Toggle",
+                        "Social Icons",
+                        "Alert",
+                        "SoundCloud",
+                        "Menu Anchor",
+                        "Read More",
+                        "Rating",
+                        "Text Path",
+                      ].map((type, index) => (
+                        <Draggable
+                          draggableId={type}
+                          index={index + 2}
+                          key={type}
+                        >
+                          {(provided) => (
+                            <li
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              className="mb-2 cursor-grab select-none rounded bg-gray-600 p-2"
+                              onClick={() => handleComponentClick(type)}
+                            >
+                              {type}
+                            </li>
+                          )}
+                        </Draggable>
+                      ))}
+                    </ul>
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            )}
+            <div className="ml-1/4 flex flex-1 flex-col p-4">
+              <Editor
+                components={components}
+                onComponentClick={onComponentClick}
+                onAddComponent={onAddComponent}
+                onDragEnd={onDragEnd}
+              />
+            </div>
+
             {selectedComponent && (
               <PropertyPanel
                 component={selectedComponent}
                 onChange={(newProps) =>
                   handleComponentChange(selectedComponent.id, newProps)
                 }
+                onClose={handleClosePropertyPanel} // Pass the close handler here
               />
             )}
-            <Editor
-              components={components}
-              onDragEnd={onDragEnd}
-              onComponentClick={handleComponentClick} // Pass click handler
-            />
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </DragDropContext>
   );
 };
 

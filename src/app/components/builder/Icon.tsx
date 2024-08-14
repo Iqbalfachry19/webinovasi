@@ -9,18 +9,18 @@ interface IconProps {
 
 const Icon: React.FC<IconProps> = ({
   icon = "star",
-  size = 24,
+  size = "24",
   color = "black",
 }) => {
   // Define icon mapping
   const iconMap = {
-    star: <StarIcon className={`w-${size} h-${size} text-${color}`} />,
+    star: <StarIcon className={`h-24 w-24 text-${color}`} />,
     home: <HomeIcon className={`w-${size} h-${size} text-${color}`} />,
     user: <UserIcon className={`w-${size} h-${size} text-${color}`} />,
   };
 
   return (
-    <div className={`flex h-${size} w-${size} items-center justify-center`}>
+    <div className={`flex h-24 w-24 items-center justify-center`}>
       {iconMap[icon] || <div>Icon not found</div>}
     </div>
   );

@@ -9,7 +9,7 @@ interface VideoPlayerProps {
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
-  url,
+  url = "https://www.youtube.com/watch?v=XHOmBV4js_E",
   width = 640,
   height = 360,
 }) => {
