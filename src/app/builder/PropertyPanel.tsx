@@ -74,8 +74,16 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
   onChange,
   onClose,
 }) => {
-  const { text, content, textAlign, setText, setContent, setTextAlign } =
-    useStore();
+  const {
+    buttonText,
+    content,
+    textAlign,
+    headingText,
+    setButtonText,
+    setContent,
+    setTextAlign,
+    setHeadingText,
+  } = useStore();
 
   const handleTextAlignChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -83,7 +91,7 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
     setTextAlign(event.target.value as "left" | "center" | "right");
   };
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value);
+    setButtonText(event.target.value);
   };
   const handleContentChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
@@ -138,10 +146,7 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
         setMethod(component.props.method || "get");
         setFields(component.props.fields?.join(",") || "");
         break;
-      case "Heading":
-        setText(component.props.text || "");
-        // Assuming heading level is handled elsewhere
-        break;
+
       default:
         break;
     }
@@ -181,7 +186,7 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
             <input
               className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
-              value={text}
+              value={buttonText}
               onChange={handleTextChange}
             />
           </label>
@@ -452,9 +457,9 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
             <input
               className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
-              value={text}
+              value={headingText}
               onChange={(e) => {
-                setText(e.target.value);
+                setHeadingText(e.target.value);
                 onChange({ text: e.target.value });
               }}
             />

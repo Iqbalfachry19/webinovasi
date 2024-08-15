@@ -2,21 +2,25 @@
 import {create} from 'zustand';
 
 interface StoreState {
-  text:string;
+  buttonText:string;
   content: string;
   textAlign: 'left' | 'center' | 'right';
-  setText: (content: string) => void;
+  headingText:string;
+  setButtonText: (buttonText: string) => void;
   setContent: (content: string) => void;
   setTextAlign: (textAlign: 'left' | 'center' | 'right') => void;
+  setHeadingText: (headingText:string) =>void;
 }
 
 const useStore = create<StoreState>((set) => ({
-  text:"Button",
+  buttonText:"Button",
   content: 'Edit this text...',
   textAlign: 'left',
-  setText: (text) => set({ text }),
+  headingText: 'Heading',
+  setButtonText: (buttonText) => set({ buttonText }),
   setContent: (content) => set({ content }),
   setTextAlign: (textAlign) => set({ textAlign }),
+  setHeadingText:(headingText) => set({headingText})
 }));
 
 export default useStore;

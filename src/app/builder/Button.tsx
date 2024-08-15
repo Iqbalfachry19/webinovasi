@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import useStore from "./store/store";
 
 const Button: React.FC = () => {
-  const { text, setText } = useStore();
+  const { buttonText, setButtonText } = useStore();
   const [isEditing, setIsEditing] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -15,7 +15,7 @@ const Button: React.FC = () => {
   // Handle the change in button text
   const handleInput = () => {
     if (buttonRef.current) {
-      setText(buttonRef.current.textContent || "");
+      setButtonText(buttonRef.current.textContent || "");
     }
   };
 
@@ -32,9 +32,9 @@ const Button: React.FC = () => {
   // Sync the store's buttonText with the component's state when it changes
   useEffect(() => {
     if (buttonRef.current) {
-      buttonRef.current.textContent = text;
+      buttonRef.current.textContent = buttonText;
     }
-  }, [text]);
+  }, [buttonText]);
 
   return (
     <button
@@ -48,7 +48,7 @@ const Button: React.FC = () => {
       className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
       style={{ cursor: isEditing ? "text" : "pointer" }}
     >
-      {text}
+      {buttonText}
     </button>
   );
 };
