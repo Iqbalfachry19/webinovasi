@@ -98,6 +98,11 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
   ) => {
     setContent(event.target.value);
   };
+  const handleHeadingTextChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setHeadingText(event.target.value);
+  };
 
   const [icon, setIcon] = useState(component.props.icon || "star");
   const [size, setSize] = useState(component.props.size || 24);
@@ -458,10 +463,7 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
               className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
               value={headingText}
-              onChange={(e) => {
-                setHeadingText(e.target.value);
-                onChange({ text: e.target.value });
-              }}
+              onChange={handleHeadingTextChange}
             />
           </label>
           {/* Assuming heading level is handled elsewhere */}
