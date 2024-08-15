@@ -19,23 +19,11 @@ const TextEditor: React.FC = () => {
       }
     }
   };
-  const setCursorToCurrentPosition = () => {
-    if (editorRef.current) {
-      const range = document.createRange();
-      const selection = window.getSelection();
-      range.selectNodeContents(editorRef.current);
-      range.collapse(false); // Move cursor to the end
-      if (selection) {
-        selection.removeAllRanges();
-        selection.addRange(range);
-      }
-    }
-  };
-  // Update content on input and keep cursor at the end
+
   const handleInput = () => {
     if (editorRef.current) {
       setContent(editorRef.current.textContent || "");
-      setCursorToCurrentPosition(); // Ensure cursor is at the end after input
+      setCursorToEnd(); // Ensure cursor is at the end after input
     }
   };
 
@@ -56,11 +44,15 @@ const TextEditor: React.FC = () => {
     }
   }, [isEditing]);
 
+  // Determine whether to apply the background color
+  const hasContent = content.trim().length > 0;
+  const backgroundColorClass = !hasContent ? "bg-gray-200 h-6" : "";
+
   return (
     <p
       ref={editorRef}
       style={{ textAlign }}
-      className={`focus:outline-none ${isEditing ? "bg-gray-200" : ""}`}
+      className={`focus:outline-none ${backgroundColorClass}`}
       contentEditable={isEditing}
       suppressContentEditableWarning={true}
       onDoubleClick={handleDoubleClick}
