@@ -74,7 +74,8 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
   onChange,
   onClose,
 }) => {
-  const { content, textAlign, setContent, setTextAlign } = useStore();
+  const { text, content, textAlign, setText, setContent, setTextAlign } =
+    useStore();
 
   const handleTextAlignChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -87,8 +88,6 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
   ) => {
     setContent(event.target.value);
   };
-
-  const [text, setText] = useState(component.props.text || "");
 
   const [icon, setIcon] = useState(component.props.icon || "star");
   const [size, setSize] = useState(component.props.size || 24);
@@ -109,9 +108,6 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
 
   useEffect(() => {
     switch (component.type) {
-      case "Button":
-        setText(component.props.text || "");
-        break;
       case "Icon":
         setIcon(component.props.icon || "star");
         setSize(component.props.size || 24);
