@@ -75,14 +75,28 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
   onClose,
 }) => {
   const {
+    imageSrc,
+    imageAlt,
+    imageHeight,
+    imageWidth,
     buttonText,
     content,
     textAlign,
     headingText,
+    iconColor,
+    iconSize,
+    iconType,
+    setImageAlt,
+    setImageHeight,
+    setImageSrc,
+    setImageWidth,
     setButtonText,
     setContent,
     setTextAlign,
     setHeadingText,
+    setIconColor,
+    setIconSize,
+    setIconType,
   } = useStore();
 
   const handleTextAlignChange = (
@@ -103,14 +117,38 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
   ) => {
     setHeadingText(event.target.value);
   };
+  const handleImageSrcChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setImageSrc(event.target.value);
+  };
+  const handleImageAltChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setImageAlt(event.target.value);
+  };
+  const handleImageWidthtChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setImageWidth(Number(event.target.value));
+  };
+  const handleImageHeightChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setImageHeight(Number(event.target.value));
+  };
+  const handleIconTypeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setIconType(event.target.value as "star" | "home" | "user");
+  };
+  const handleIconSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIconSize(Number(event.target.value));
+  };
+  const handleIconColorChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setIconColor(event.target.value);
+  };
 
-  const [icon, setIcon] = useState(component.props.icon || "star");
-  const [size, setSize] = useState(component.props.size || 24);
   const [color, setColor] = useState(component.props.color || "#000000");
-  const [src, setSrc] = useState(component.props.src || "");
-  const [width, setWidth] = useState(component.props.width || 640);
-  const [height, setHeight] = useState(component.props.height || 360);
-  const [alt, setAlt] = useState(component.props.alt || "");
+
   const [thickness, setThickness] = useState(component.props.thickness || 1);
   const [margin, setMargin] = useState(component.props.margin || 10);
   const [latitude, setLatitude] = useState(component.props.latitude || 0);
@@ -123,17 +161,6 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
 
   useEffect(() => {
     switch (component.type) {
-      case "Icon":
-        setIcon(component.props.icon || "star");
-        setSize(component.props.size || 24);
-        setColor(component.props.color || "#000000");
-        break;
-      case "Image":
-        setSrc(component.props.src || "");
-        setWidth(component.props.width || 640);
-        setHeight(component.props.height || 360);
-        setAlt(component.props.alt || "");
-        break;
       case "Divider":
         setThickness(component.props.thickness || 1);
         break;
@@ -156,24 +183,6 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
         break;
     }
   }, [component]);
-
-  const handleChange =
-    (key: keyof ComponentProps["props"], isNumber = false) =>
-    (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-      const { type, value } = event.target;
-      const newValue = isNumber
-        ? value === "" // Handle empty value for numbers
-          ? undefined
-          : Number(value)
-        : value;
-
-      // Special handling for fields that can be empty
-      if (key === "text" || key === "content") {
-        onChange({ [key]: newValue || undefined });
-      } else {
-        onChange({ [key]: newValue });
-      }
-    };
 
   return (
     <div className="w-80 rounded-lg bg-gray-800 p-4 text-white shadow-lg">
@@ -229,11 +238,8 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
             Icon Name:
             <select
               className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={icon}
-              onChange={(e) => {
-                setIcon(e.target.value);
-                onChange({ icon: e.target.value });
-              }}
+              value={iconType}
+              onChange={handleIconTypeChange}
             >
               <option value="star">Star</option>
               <option value="home">Home</option>
@@ -246,11 +252,8 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
             <input
               className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="number"
-              value={size}
-              onChange={(e) => {
-                setSize(Number(e.target.value));
-                onChange({ size: Number(e.target.value) });
-              }}
+              value={iconSize}
+              onChange={handleIconSizeChange}
             />
           </label>
           <label className="mb-1 block text-sm font-medium">
@@ -258,11 +261,8 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
             <input
               className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="color"
-              value={color}
-              onChange={(e) => {
-                setColor(e.target.value);
-                onChange({ color: e.target.value });
-              }}
+              value={iconColor}
+              onChange={handleIconColorChange}
             />
           </label>
         </div>
@@ -275,11 +275,8 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
             <input
               className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
-              value={src}
-              onChange={(e) => {
-                setSrc(e.target.value);
-                onChange({ src: e.target.value });
-              }}
+              value={imageSrc}
+              onChange={handleImageSrcChange}
             />
           </label>
           <label className="mb-1 block text-sm font-medium">
@@ -287,11 +284,8 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
             <input
               className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
-              value={alt}
-              onChange={(e) => {
-                setAlt(e.target.value);
-                onChange({ alt: e.target.value });
-              }}
+              value={imageAlt}
+              onChange={handleImageAltChange}
             />
           </label>
           <label className="mb-1 block text-sm font-medium">
@@ -299,11 +293,8 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
             <input
               className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="number"
-              value={width}
-              onChange={(e) => {
-                setWidth(Number(e.target.value));
-                onChange({ width: Number(e.target.value) });
-              }}
+              value={imageWidth}
+              onChange={handleImageWidthtChange}
             />
           </label>
           <label className="mb-1 block text-sm font-medium">
@@ -311,11 +302,8 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
             <input
               className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="number"
-              value={height}
-              onChange={(e) => {
-                setHeight(Number(e.target.value));
-                onChange({ height: Number(e.target.value) });
-              }}
+              value={imageHeight}
+              onChange={handleImageHeightChange}
             />
           </label>
         </div>

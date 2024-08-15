@@ -1,27 +1,44 @@
 import React from "react";
 import { StarIcon, HomeIcon, UserIcon } from "@heroicons/react/24/outline";
+import useStore from "./store/store";
 
 interface IconProps {
-  icon?: "star" | "home" | "user"; // Make icon prop optional
-  size?: number; // Optional: size of the icon in pixels
-  color?: string; // Optional: color of the icon
+  size?: number;
+  color?: string;
 }
 
-const Icon: React.FC<IconProps> = ({
-  icon = "star",
-  size = "24",
-  color = "black",
-}) => {
-  // Define icon mapping
+const Icon: React.FC<IconProps> = ({ size, color }) => {
+  const { iconType, iconSize, iconColor } = useStore((state) => ({
+    iconType: state.iconType,
+    iconSize: state.iconSize,
+    iconColor: state.iconColor,
+  }));
+
+  // Define icon mapping with inline style for color
   const iconMap = {
-    star: <StarIcon className={`h-24 w-24 text-${color}`} />,
-    home: <HomeIcon className={`w-${size} h-${size} text-${color}`} />,
-    user: <UserIcon className={`w-${size} h-${size} text-${color}`} />,
+    star: (
+      <StarIcon
+        style={{ color: iconColor }} // Use inline style for color
+        className={`w-${iconSize} h-${iconSize}`}
+      />
+    ),
+    home: (
+      <HomeIcon
+        style={{ color: iconColor }} // Use inline style for color
+        className={`w-${iconSize} h-${iconSize}`}
+      />
+    ),
+    user: (
+      <UserIcon
+        style={{ color: iconColor }} // Use inline style for color
+        className={`w-${iconSize} h-${iconSize}`}
+      />
+    ),
   };
 
   return (
-    <div className={`flex h-24 w-24 items-center justify-center`}>
-      {iconMap[icon] || <div>Icon not found</div>}
+    <div className="flex items-center justify-center">
+      {iconMap[iconType] || <div>Icon not found</div>}
     </div>
   );
 };

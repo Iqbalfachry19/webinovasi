@@ -1,25 +1,22 @@
+// Image.tsx
 import React from "react";
+import useStore from "./store/store"; // Adjust the import path if necessary
 
-interface ImageProps {
-  src: string; // URL of the image
-  alt?: string; // Alternative text for the image
-  width?: number; // Optional: width of the image
-  height?: number; // Optional: height of the image
-}
+const Image: React.FC = () => {
+  const { imageSrc, imageAlt, imageWidth, imageHeight } = useStore((state) => ({
+    imageSrc: state.imageSrc,
+    imageAlt: state.imageAlt,
+    imageWidth: state.imageWidth,
+    imageHeight: state.imageHeight,
+  }));
 
-const Image: React.FC<ImageProps> = ({
-  src = "https://webinovasi.com/wp-content/plugins/elementor/assets/images/placeholder.png",
-  alt = "Image",
-  width = 640,
-  height = 360,
-}) => {
   return (
     <div style={{ textAlign: "center" }}>
       <img
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
+        src={imageSrc}
+        alt={imageAlt}
+        width={imageWidth}
+        height={imageHeight}
         style={{ border: "1px solid #ddd", borderRadius: "4px" }}
       />
     </div>
