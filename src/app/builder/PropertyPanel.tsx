@@ -82,7 +82,9 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
   ) => {
     setTextAlign(event.target.value as "left" | "center" | "right");
   };
-
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value);
+  };
   const handleContentChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
@@ -144,12 +146,6 @@ const PropertyPanel: React.FC<PropertyPanelProps> = ({
         break;
     }
   }, [component]);
-
-  const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newText = event.target.value;
-    setText(newText);
-    onChange({ text: newText });
-  };
 
   const handleChange =
     (key: keyof ComponentProps["props"], isNumber = false) =>
