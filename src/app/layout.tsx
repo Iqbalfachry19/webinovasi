@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import { ThirdwebProvider } from "thirdweb/react";
-import { ConfigProvider } from "./context/ConfigContext"; // Import ConfigProvider
+import { ConfigProvider } from "./builder/context/ConfigContext"; // Import ConfigProvider
 
 const inter = Inter({ subsets: ["latin"] });
 
