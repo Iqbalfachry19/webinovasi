@@ -11,7 +11,12 @@ import {
 } from "thirdweb/react";
 import { toUnits } from "thirdweb/utils";
 import { sepolia } from "thirdweb/chains";
-import { prepareContractCall, prepareTransaction, toWei } from "thirdweb";
+import {
+  prepareContractCall,
+  prepareTransaction,
+  toWei,
+  waitForReceipt,
+} from "thirdweb";
 import { getContract } from "thirdweb";
 import { defineChain } from "thirdweb/chains";
 import { useSendTransaction } from "thirdweb/react";
@@ -33,6 +38,38 @@ function Payment() {
   const [email, setEmail] = useState(""); // State to store user email
   const [address, setAddress] = useState(""); // State to store user address
   const [whatsapp, setWhatsapp] = useState(""); // State to store WhatsApp number
+  const [exchangeRate, setExchangeRate] = useState(0); // State to store the exchange rate
+  const [totalPriceInUSD, setTotalPriceInUSD] = useState(0); // State to store total price in USDC
+
+  useEffect(() => {
+    const fetchExchangeRate = async () => {
+      try {
+        const response = await fetch(
+          "https://api.exchangerate-api.com/v4/latest/IDR",
+        ); // Replace with actual endpoint if needed
+        const data = await response.json();
+        const usdToIdrRate = data.rates.USD; // Assuming the API returns USD rate
+        const idrToUsdRate = 1 / usdToIdrRate; // Inverse rate to convert IDR to USD
+        setExchangeRate(idrToUsdRate);
+      } catch (error) {
+        console.error("Error fetching exchange rate:", error);
+      }
+    };
+
+    fetchExchangeRate();
+  }, []);
+
+  useEffect(() => {
+    // Calculate total price in USDC
+    const totalPrice =
+      hostingPrice +
+      themePrice +
+      (domainPrice ? parseInt(domainPrice.replace(/[^0-9]/g, "")) : 0);
+
+    if (exchangeRate > 0) {
+      setTotalPriceInUSD(totalPrice / exchangeRate); // Adjust divisor based on decimal places for USDC
+    }
+  }, [hostingPrice, themePrice, domainPrice, exchangeRate]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("selectedTheme") || "default";
@@ -330,14 +367,15 @@ function Payment() {
             <p className="text-sm font-medium text-gray-700">Total Harga:</p>
             <p className="text-lg font-bold">
               Rp{" "}
-              {hostingPrice +
+              {(
+                hostingPrice +
                 themePrice +
                 (domainPrice
-                  ? parseInt(domainPrice.replace(/[^0-9]/g, ""))
-                  : 0)}
+                  ? parseInt(domainPrice.replace(/[^0-9]/g, ""), 10)
+                  : 0)
+              ).toLocaleString("id-ID")}
             </p>
           </div>
-
           <button
             onClick={handlePayment}
             className="w-full rounded-md bg-[#5B59C2] px-4 py-2 text-white shadow-sm hover:bg-[#5B59C2] focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
@@ -345,8 +383,7 @@ function Payment() {
           >
             Pay Now
           </button>
-          <CustomAccountFactory />
-
+          <CustomAccountFactory totalHarga={totalPriceInUSD} />
           <pre className="mt-4 max-w-md overflow-auto bg-gray-100 p-2 text-xs text-gray-800">
             {resultJson}
           </pre>
@@ -366,10 +403,11 @@ function Payment() {
 //   chain: defineChain(11155111),
 //   address: "0x72A6F19203027bB12B6b13B62B394f81b80500b1",
 // });
-function CustomAccountFactory() {
+function CustomAccountFactory({ totalHarga }: any) {
   const { mutate: sendTransaction } = useSendTransaction();
   const account = useActiveAccount();
   const connectedWallet = useActiveWallet();
+
   return (
     <div className="mb-20 flex flex-col items-center md:mb-20">
       <p className="mb-4 text-base md:mb-4">Connect to blockchain to pay</p>
@@ -382,29 +420,48 @@ function CustomAccountFactory() {
         }}
       />
       {account && connectedWallet ? (
-        <button
-          className="mt-2 w-full rounded-md bg-[#5B59C2] px-4 py-2 text-white shadow-sm hover:bg-[#5B59C2] focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
-          onClick={() => {
-            // const transaction = prepareContractCall({
-            //   contract,
-            //   method:
-            //     "function addData(int256 temperature, int256 humidity, int256 pressure) public",
-            //   params: [toUnits("12", 0), toUnits("12", 0), toUnits("12", 0)],
-            // });
-            // sendTransaction(transaction);
+        <>
+          <p className="text-lg font-bold">total price USDC: {totalHarga}</p>
+          <button
+            className="mt-2 w-full rounded-md bg-[#5B59C2] px-4 py-2 text-white shadow-sm hover:bg-[#5B59C2] focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
+            onClick={async () => {
+              // const transaction = prepareContractCall({
+              //   contract,
+              //   method:
+              //     "function addData(int256 temperature, int256 humidity, int256 pressure) public",
+              //   params: [toUnits("12", 0), toUnits("12", 0), toUnits("12", 0)],
+              // });
+              // sendTransaction(transaction);
+              try {
+                const USDC_CONTRACT_ADDRESS =
+                  "0x1c7d4b196cb0c7b01d743fbc6116a902379c7238";
+                const recipientAddress =
+                  "0x7F9F9B467d839385Fb9d89576d4Ba3deA661Bb52"; // Address to send USDT to
+                const contract = getContract({
+                  client,
+                  chain: defineChain(11155111),
+                  address: USDC_CONTRACT_ADDRESS,
+                });
 
-            const transaction = prepareTransaction({
-              client,
-              to: "0x7F9F9B467d839385Fb9d89576d4Ba3deA661Bb52",
-              chain: sepolia,
-              value: toWei("0.001"),
-            });
+                const transaction = prepareContractCall({
+                  contract,
+                  method:
+                    "function transfer(address to, uint256 value) public returns (bool success)",
+                  params: [recipientAddress, toUnits(totalHarga.toString(), 6)], // Adjust decimals for USDT (6 decimals)
+                });
 
-            sendTransaction(transaction);
-          }}
-        >
-          Pay with blockchain Now
-        </button>
+                const result = sendTransaction(transaction);
+
+                console.log(result);
+              } catch (error) {
+                console.error(error);
+              }
+              // Handle transaction result
+            }}
+          >
+            Pay with USDC Now
+          </button>
+        </>
       ) : (
         <></>
       )}
