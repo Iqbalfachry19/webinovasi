@@ -18,20 +18,17 @@ const Icon: React.FC<IconProps> = ({ size, color }) => {
   const iconMap = {
     star: (
       <StarIcon
-        style={{ color: iconColor }} // Use inline style for color
-        className={`w-${iconSize} h-${iconSize}`}
+        style={{ color: iconColor, width: iconSize, height: iconSize }} // Use inline style for color
       />
     ),
     home: (
       <HomeIcon
-        style={{ color: iconColor }} // Use inline style for color
-        className={`w-${iconSize} h-${iconSize}`}
+        style={{ color: iconColor, width: iconSize, height: iconSize }} // Use inline style for colorx
       />
     ),
     user: (
       <UserIcon
-        style={{ color: iconColor }} // Use inline style for color
-        className={`w-${iconSize} h-${iconSize}`}
+        style={{ color: iconColor, width: iconSize, height: iconSize }} // Use inline style for color
       />
     ),
   };
