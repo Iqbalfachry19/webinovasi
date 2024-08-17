@@ -1,3 +1,4 @@
+"use client";
 import { useConfig } from "./context/ConfigContext";
 import Editor from "./Editor";
 import PropertyPanel from "./PropertyPanel";
