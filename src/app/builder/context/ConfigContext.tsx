@@ -1,13 +1,16 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import EditorWrapper from "../EditorWrapper";
 
 interface ConfigContextType {
   editorEnabled: boolean;
   toggleEditor: () => void;
 }
+import dynamic from "next/dynamic";
 
+const EditorWrapper = dynamic(() => import("../EditorWrapper"), {
+  ssr: false,
+});
 const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
 
 export const ConfigProvider: React.FC<{ children: ReactNode }> = ({
