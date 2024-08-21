@@ -85,7 +85,7 @@ interface ComponentProps {
 const EditorWrapper: React.FC = () => {
   const { editorEnabled, toggleEditor } = useConfig();
   const [components, setComponents] = useState<ComponentProps[]>([]);
-  console.log(components);
+
   const [selectedComponent, setSelectedComponent] =
     useState<ComponentProps | null>(null);
   const [sidebarVisible, setSidebarVisible] = useState(true);
@@ -190,7 +190,7 @@ const EditorWrapper: React.FC = () => {
           <div className="flex w-full select-none">
             {sidebarVisible && (
               <SortableContext
-                items={components.map((comp) => comp.id)}
+                items={["Container", "Grid"]}
                 strategy={rectSortingStrategy}
               >
                 <div className="w-1/4 select-none bg-gray-800 p-4 text-white">
