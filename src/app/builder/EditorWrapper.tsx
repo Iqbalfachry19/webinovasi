@@ -85,6 +85,39 @@ interface ComponentProps {
 const EditorWrapper: React.FC = () => {
   const { editorEnabled, toggleEditor } = useConfig();
   const [components, setComponents] = useState<ComponentProps[]>([]);
+  const [layouts, setLayouts] = useState(["Container", "Grid"]);
+  const [basics, setBasics] = useState([
+    "Button",
+    "Text Editor",
+    "Heading",
+    "Image",
+    "Video",
+    "Divider",
+    "Spacer",
+    "Google Map",
+    "Icon",
+    "Form",
+  ]);
+  const [generals, setGenerals] = useState([
+    "Image Box",
+    "Icon Box",
+    "Image Carousel",
+    "Basic Gallery",
+    "Icon List",
+    "Counter",
+    "Progress Bar",
+    "Testimonial",
+    "Tabs",
+    "Accordion",
+    "Toggle",
+    "Social Icons",
+    "Alert",
+    "SoundCloud",
+    "Menu Anchor",
+    "Read More",
+    "Rating",
+    "Text Path",
+  ]);
 
   const [selectedComponent, setSelectedComponent] =
     useState<ComponentProps | null>(null);
@@ -97,13 +130,43 @@ const EditorWrapper: React.FC = () => {
 
     if (!over) return;
 
-    const oldIndex = components.findIndex((comp) => comp.id === active.id);
-    const newIndex = components.findIndex((comp) => comp.id === over.id);
+    // Determine which list the item belongs to
+    const getComponentIndex = (id: string) => {
+      if (layouts.includes(id)) {
+        return layouts.findIndex((item) => item === id);
+      } else if (basics.includes(id)) {
+        return basics.findIndex((item) => item === id);
+      } else if (generals.includes(id)) {
+        return generals.findIndex((item) => item === id);
+      }
+      return -1;
+    };
 
-    if (oldIndex !== newIndex) {
-      setComponents((prevComponents) =>
-        arrayMove(prevComponents, oldIndex, newIndex),
-      );
+    const getComponentCategory = (id: string) => {
+      if (layouts.includes(id)) return "layouts";
+      if (basics.includes(id)) return "basics";
+      if (generals.includes(id)) return "generals";
+      return null;
+    };
+
+    const oldIndex = getComponentIndex(active.id);
+    const newIndex = getComponentIndex(over.id);
+
+    if (oldIndex === -1 || newIndex === -1) return;
+
+    const oldCategory = getComponentCategory(active.id);
+    const newCategory = getComponentCategory(over.id);
+
+    if (oldCategory && newCategory && oldCategory === newCategory) {
+      if (oldCategory === "layouts") {
+        setLayouts((prevLayouts) => arrayMove(prevLayouts, oldIndex, newIndex));
+      } else if (oldCategory === "basics") {
+        setBasics((prevBasics) => arrayMove(prevBasics, oldIndex, newIndex));
+      } else if (oldCategory === "generals") {
+        setGenerals((prevGenerals) =>
+          arrayMove(prevGenerals, oldIndex, newIndex),
+        );
+      }
     }
   };
 
@@ -166,39 +229,36 @@ const EditorWrapper: React.FC = () => {
   };
 
   return (
-    <DndContext
-      sensors={sensors}
-      onDragEnd={onDragEnd} // Pass onDragEnd to DndContext
-    >
-      <div className="relative flex select-none">
-        <button
-          onClick={handleSidebarToggle}
-          className={`transition-all duration-300 ease-in-out ${
-            sidebarVisible
-              ? "absolute right-3/4 top-1/2 flex -translate-y-1/2 transform items-center rounded bg-gray-800 p-2 text-white"
-              : "absolute left-0 top-1/2 -translate-y-1/2 transform bg-gray-800 p-2 text-white"
-          }`}
-        >
-          {sidebarVisible ? (
-            <ChevronLeftIcon className="h-5 w-5" />
-          ) : (
-            <ChevronRightIcon className="h-5 w-5" />
-          )}
-        </button>
+    <div className="relative flex select-none">
+      <button
+        onClick={handleSidebarToggle}
+        className={`transition-all duration-300 ease-in-out ${
+          sidebarVisible
+            ? "absolute right-3/4 top-1/2 flex -translate-y-1/2 transform items-center rounded bg-gray-800 p-2 text-white"
+            : "absolute left-0 top-1/2 -translate-y-1/2 transform bg-gray-800 p-2 text-white"
+        }`}
+      >
+        {sidebarVisible ? (
+          <ChevronLeftIcon className="h-5 w-5" />
+        ) : (
+          <ChevronRightIcon className="h-5 w-5" />
+        )}
+      </button>
 
-        {editorEnabled && (
-          <div className="flex w-full select-none">
-            {sidebarVisible && (
-              <SortableContext
-                items={["Container", "Grid"]}
-                strategy={rectSortingStrategy}
-              >
-                <div className="w-1/4 select-none bg-gray-800 p-4 text-white">
-                  <h2 className="mb-4 text-lg font-semibold">Elements</h2>
-                  {/* Sidebar content */}
-                  <h3 className="text-md mt-4 font-semibold">Layout</h3>
+      {editorEnabled && (
+        <div className="flex w-full select-none">
+          {sidebarVisible && (
+            <DndContext
+              collisionDetection={closestCenter}
+              onDragEnd={onDragEnd} // Pass onDragEnd to DndContext
+            >
+              <div className="w-1/4 select-none bg-gray-800 p-4 text-white">
+                <h2 className="mb-4 text-lg font-semibold">Elements</h2>
+                {/* Sidebar content */}
+                <h3 className="text-md mt-4 font-semibold">Layout</h3>
+                <SortableContext items={layouts} strategy={rectSortingStrategy}>
                   <div className="grid select-none grid-cols-2 gap-2">
-                    {["Container", "Grid"].map((type, index) => (
+                    {layouts.map((type, index) => (
                       <SidebarItem
                         key={type}
                         id={type}
@@ -207,20 +267,11 @@ const EditorWrapper: React.FC = () => {
                       />
                     ))}
                   </div>
-                  <h3 className="text-md font-semibold">Basic</h3>
+                </SortableContext>
+                <h3 className="text-md font-semibold">Basic</h3>
+                <SortableContext items={basics} strategy={rectSortingStrategy}>
                   <div className="grid select-none grid-cols-2 gap-2">
-                    {[
-                      "Button",
-                      "Text Editor",
-                      "Heading",
-                      "Image",
-                      "Video",
-                      "Divider",
-                      "Spacer",
-                      "Google Map",
-                      "Icon",
-                      "Form",
-                    ].map((type, index) => (
+                    {basics.map((type, index) => (
                       <SidebarItem
                         key={type}
                         id={type}
@@ -229,28 +280,14 @@ const EditorWrapper: React.FC = () => {
                       />
                     ))}
                   </div>
-                  <h3 className="text-md font-semibold">General</h3>
+                </SortableContext>
+                <h3 className="text-md font-semibold">General</h3>
+                <SortableContext
+                  items={generals}
+                  strategy={rectSortingStrategy}
+                >
                   <div className="grid select-none grid-cols-2 gap-2">
-                    {[
-                      "Image Box",
-                      "Icon Box",
-                      "Image Carousel",
-                      "Basic Gallery",
-                      "Icon List",
-                      "Counter",
-                      "Progress Bar",
-                      "Testimonial",
-                      "Tabs",
-                      "Accordion",
-                      "Toggle",
-                      "Social Icons",
-                      "Alert",
-                      "SoundCloud",
-                      "Menu Anchor",
-                      "Read More",
-                      "Rating",
-                      "Text Path",
-                    ].map((type, index) => (
+                    {generals.map((type, index) => (
                       <SidebarItem
                         key={type}
                         id={type}
@@ -259,32 +296,32 @@ const EditorWrapper: React.FC = () => {
                       />
                     ))}
                   </div>
-                </div>
-              </SortableContext>
-            )}
-            <div className="ml-1/4 flex flex-1 flex-col p-4">
-              <Editor
-                setComponents={setComponents}
-                components={components}
-                onComponentClick={onComponentClick}
-                onAddComponent={onAddComponent}
-                onDragEnd={onDragEnd} // Pass the onDragEnd prop to Editor
-              />
-            </div>
-
-            {selectedComponent && (
-              <PropertyPanel
-                component={selectedComponent}
-                onChange={(newProps) =>
-                  handleComponentChange(selectedComponent.id, newProps)
-                }
-                onClose={handleClosePropertyPanel}
-              />
-            )}
+                </SortableContext>
+              </div>
+            </DndContext>
+          )}
+          <div className="ml-1/4 flex flex-1 flex-col p-4">
+            <Editor
+              setComponents={setComponents}
+              components={components}
+              onComponentClick={onComponentClick}
+              onAddComponent={onAddComponent}
+              onDragEnd={onDragEnd} // Pass the onDragEnd prop to Editor
+            />
           </div>
-        )}
-      </div>
-    </DndContext>
+
+          {selectedComponent && (
+            <PropertyPanel
+              component={selectedComponent}
+              onChange={(newProps) =>
+                handleComponentChange(selectedComponent.id, newProps)
+              }
+              onClose={handleClosePropertyPanel}
+            />
+          )}
+        </div>
+      )}
+    </div>
   );
 };
 
