@@ -11,9 +11,12 @@ import {
   useSensor,
   useSensors,
   useDroppable,
+  TouchSensor,
 } from "@dnd-kit/core";
 import {
   arrayMove,
+  rectSortingStrategy,
+  rectSwappingStrategy,
   SortableContext,
   useSortable,
   verticalListSortingStrategy,
@@ -87,7 +90,7 @@ const EditorWrapper: React.FC = () => {
     useState<ComponentProps | null>(null);
   const [sidebarVisible, setSidebarVisible] = useState(true);
 
-  const sensors = useSensors(useSensor(MouseSensor));
+  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
   const onDragEnd = (event: any) => {
     const { active, over } = event;
@@ -165,7 +168,6 @@ const EditorWrapper: React.FC = () => {
   return (
     <DndContext
       sensors={sensors}
-      collisionDetection={closestCenter}
       onDragEnd={onDragEnd} // Pass onDragEnd to DndContext
     >
       <div className="relative flex select-none">
@@ -189,13 +191,13 @@ const EditorWrapper: React.FC = () => {
             {sidebarVisible && (
               <SortableContext
                 items={components.map((comp) => comp.id)}
-                strategy={verticalListSortingStrategy}
+                strategy={rectSortingStrategy}
               >
                 <div className="w-1/4 select-none bg-gray-800 p-4 text-white">
                   <h2 className="mb-4 text-lg font-semibold">Elements</h2>
                   {/* Sidebar content */}
                   <h3 className="text-md mt-4 font-semibold">Layout</h3>
-                  <ul className="grid grid-cols-2 gap-2">
+                  <div className="grid select-none grid-cols-2 gap-2">
                     {["Container", "Grid"].map((type, index) => (
                       <SidebarItem
                         key={type}
@@ -204,9 +206,9 @@ const EditorWrapper: React.FC = () => {
                         onComponentClick={handleComponentClick}
                       />
                     ))}
-                  </ul>
+                  </div>
                   <h3 className="text-md font-semibold">Basic</h3>
-                  <ul className="grid grid-cols-2 gap-2">
+                  <div className="grid select-none grid-cols-2 gap-2">
                     {[
                       "Button",
                       "Text Editor",
@@ -226,9 +228,9 @@ const EditorWrapper: React.FC = () => {
                         onComponentClick={handleComponentClick}
                       />
                     ))}
-                  </ul>
+                  </div>
                   <h3 className="text-md font-semibold">General</h3>
-                  <ul className="grid grid-cols-2 gap-2">
+                  <div className="grid select-none grid-cols-2 gap-2">
                     {[
                       "Image Box",
                       "Icon Box",
@@ -256,12 +258,13 @@ const EditorWrapper: React.FC = () => {
                         onComponentClick={handleComponentClick}
                       />
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </SortableContext>
             )}
             <div className="ml-1/4 flex flex-1 flex-col p-4">
               <Editor
+                setComponents={setComponents}
                 components={components}
                 onComponentClick={onComponentClick}
                 onAddComponent={onAddComponent}
@@ -294,12 +297,7 @@ function SidebarItem({ id, onComponentClick }: any) {
     transform: CSS.Transform.toString(transform),
     transition,
   };
-  const handleClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    id: string,
-  ) => {
-    e.preventDefault(); // Prevent default action
-    e.stopPropagation(); // Stop propagation to avoid interference with drag
+  const handleClick = (id: string) => {
     onComponentClick(id);
   };
   return (
@@ -309,7 +307,7 @@ function SidebarItem({ id, onComponentClick }: any) {
       {...attributes}
       {...listeners}
       className="cursor-pointer select-none rounded bg-gray-700 p-2 text-white"
-      onMouseDown={(e) => handleClick(e, id)}
+      onMouseDown={() => handleClick(id)}
     >
       {id}
     </div>

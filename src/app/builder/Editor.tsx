@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
+import {
+  closestCenter,
+  DndContext,
+  DragOverlay,
+  useDraggable,
+  useDroppable,
+} from "@dnd-kit/core";
 import {
   SortableContext,
   verticalListSortingStrategy,
@@ -92,6 +98,7 @@ interface EditorProps {
         props: ComponentProps;
       }>
     | any;
+  setComponents: (components: any) => void;
   onDragEnd: (result: any) => void;
   onComponentClick: (id: string) => void;
   onAddComponent: (newComponent: any) => void;
@@ -99,6 +106,7 @@ interface EditorProps {
 
 const Editor: React.FC<EditorProps> = ({
   components,
+  setComponents,
   onDragEnd,
   onComponentClick,
   onAddComponent,
@@ -107,6 +115,8 @@ const Editor: React.FC<EditorProps> = ({
   const [selectedComponent, setSelectedComponent] = useState<string | null>(
     null,
   );
+  const [activeId, setActiveId] = useState(null);
+
   const [buttonNotClicked, setButtonNotClicked] = useState<boolean>(true);
 
   const generateLayoutClasses = (
@@ -158,22 +168,32 @@ const Editor: React.FC<EditorProps> = ({
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
-    if (active.id !== over?.id) {
-      const oldIndex = components.findIndex(
-        (component: any) => component.id === active.id,
-      );
-      const newIndex = components.findIndex(
-        (component: any) => component.id === over?.id,
-      );
 
-      const reorderedComponents = arrayMove(components, oldIndex, newIndex);
-      onDragEnd(reorderedComponents);
+    if (!over) return;
+
+    const oldIndex = components.findIndex((comp: any) => comp.id === active.id);
+    const newIndex = components.findIndex((comp: any) => comp.id === over.id);
+
+    if (oldIndex !== newIndex) {
+      setComponents((prevComponents: any) =>
+        arrayMove(prevComponents, oldIndex, newIndex),
+      );
     }
+    setActiveId(null);
   };
+  function handleDragStart(event: any) {
+    const { active } = event;
+
+    setActiveId(active.id);
+  }
 
   return (
     <>
-      <DndContext onDragEnd={handleDragEnd}>
+      <DndContext
+        collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
         <SortableContext
           items={components.map((item: any) => item.id)}
           strategy={verticalListSortingStrategy}
@@ -188,6 +208,11 @@ const Editor: React.FC<EditorProps> = ({
             handleLayoutSelection={handleLayoutSelection}
           />
         </SortableContext>
+        <DragOverlay>
+          {activeId ? (
+            <div className="h-12 rounded border border-gray-400 bg-gray-100 p-2"></div>
+          ) : null}
+        </DragOverlay>
       </DndContext>
     </>
   );
