@@ -123,7 +123,12 @@ const EditorWrapper: React.FC = () => {
     useState<ComponentProps | null>(null);
   const [sidebarVisible, setSidebarVisible] = useState(true);
 
-  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: { distance: 5 },
+    }),
+    useSensor(TouchSensor),
+  );
 
   const onDragEnd = (event: any) => {
     const { active, over } = event;
@@ -250,6 +255,7 @@ const EditorWrapper: React.FC = () => {
           {sidebarVisible && (
             <DndContext
               collisionDetection={closestCenter}
+              sensors={sensors}
               onDragEnd={onDragEnd} // Pass onDragEnd to DndContext
             >
               <div className="w-1/4 select-none bg-gray-800 p-4 text-white">
@@ -344,7 +350,7 @@ function SidebarItem({ id, onComponentClick }: any) {
       {...attributes}
       {...listeners}
       className="cursor-pointer select-none rounded bg-gray-700 p-2 text-white"
-      onMouseDown={() => handleClick(id)}
+      onClick={() => handleClick(id)}
     >
       {id}
     </div>

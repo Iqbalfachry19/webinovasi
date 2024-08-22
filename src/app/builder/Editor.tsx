@@ -5,8 +5,12 @@ import {
   closestCenter,
   DndContext,
   DragOverlay,
+  MouseSensor,
+  TouchSensor,
   useDraggable,
   useDroppable,
+  useSensor,
+  useSensors,
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -28,6 +32,23 @@ import Form from "./Form";
 import Grid from "./Grid";
 import Container from "./Container";
 import ImageBox from "./ImageBox";
+import IconBox from "./IconBox";
+import ImageCarousel from "./ImageCarousel";
+import BasicGallery from "./BasicGallery";
+import IconList from "./IconList";
+import Counter from "./Counter";
+import ProgressBar from "./ProgressBar";
+import Testimonial from "./Testimonial";
+import Tabs from "./Tabs";
+import Accordion from "./Accordion";
+import Toggle from "./Toggle";
+import SocialIcons from "./SocialIcons";
+import Alert from "./Alert";
+import SoundCloud from "./SoundCloud";
+import MenuAnchor from "./MenuAnchor";
+import ReadMore from "./ReadMore";
+import Rating from "./Rating";
+import TextPath from "./TextPath";
 
 interface ButtonProps {
   text?: string;
@@ -186,10 +207,16 @@ const Editor: React.FC<EditorProps> = ({
 
     setActiveId(active.id);
   }
-
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: { distance: 5 },
+    }),
+    useSensor(TouchSensor),
+  );
   return (
     <>
       <DndContext
+        sensors={sensors}
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
@@ -337,7 +364,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
       {...attributes}
       {...listeners}
       style={style}
-      onMouseDown={() => onComponentClick(item.id)}
+      onClick={() => onComponentClick(item.id)}
       className={`mb-2 p-2 ${
         item.type === "Grid" || item.type === "Container"
           ? `${generateLayoutClasses(
@@ -373,7 +400,24 @@ const SortableItem: React.FC<SortableItemProps> = ({
           generateLayoutClasses={generateLayoutClasses}
         />
       )}
-      {item.type === "ImageBox" && <ImageBox {...item.props} />}
+      {item.type === "Image Box" && <ImageBox {...item.props} />}
+      {item.type === "Icon Box" && <IconBox {...item.props} />}
+      {item.type === "Image Carousel" && <ImageCarousel {...item.props} />}
+      {item.type === "Basic Gallery" && <BasicGallery {...item.props} />}
+      {item.type === "Icon List" && <IconList {...item.props} />}
+      {item.type === "Counter" && <Counter {...item.props} />}
+      {item.type === "Progress Bar" && <ProgressBar {...item.props} />}
+      {item.type === "Testimonial" && <Testimonial {...item.props} />}
+      {item.type === "Tabs" && <Tabs {...item.props} />}
+      {item.type === "Accordion" && <Accordion {...item.props} />}
+      {item.type === "Toggle" && <Toggle {...item.props} />}
+      {item.type === "Social Icons" && <SocialIcons {...item.props} />}
+      {item.type === "Alert" && <Alert {...item.props} />}
+      {item.type === "SoundCloud" && <SoundCloud {...item.props} />}
+      {item.type === "Menu Anchor" && <MenuAnchor {...item.props} />}
+      {item.type === "Read More" && <ReadMore {...item.props} />}
+      {item.type === "Rating" && <Rating {...item.props} />}
+      {item.type === "Text Path" && <TextPath {...item.props} />}
     </div>
   );
 };

@@ -26,7 +26,7 @@ const ImageBox: React.FC<ImageBoxProps> = ({
         style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "cover" }}
       />
 
-      <h3 className="text-black">{title}</h3>
+      <h3 className="font-bold text-black">{title}</h3>
 
       <p className="text-black">{description}</p>
     </div>
