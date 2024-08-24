@@ -136,7 +136,8 @@ const EditorWrapper: React.FC = () => {
     const { active, over } = event;
 
     if (!over) return;
-
+    console.log(over);
+    console.log(active);
     // Determine which list the item belongs to
     const getComponentIndex = (id: string) => {
       if (layouts.includes(id)) {
@@ -158,7 +159,14 @@ const EditorWrapper: React.FC = () => {
 
     const oldIndex = getComponentIndex(active.id);
     const newIndex = getComponentIndex(over.id);
-
+    const oldInde = components.findIndex((comp: any) => comp.id === active.id);
+    const newInde = components.findIndex((comp: any) => comp.id === over.id);
+    if (oldInde !== newInde) {
+      setComponents((prevComponents: any) =>
+        arrayMove(prevComponents, oldInde, newInde),
+      );
+    }
+    setActiveId(null);
     if (oldIndex === -1 || newIndex === -1) return;
 
     const oldCategory = getComponentCategory(active.id);
@@ -175,6 +183,8 @@ const EditorWrapper: React.FC = () => {
         );
       }
     }
+    console.log(components);
+
     setActiveId(null);
   };
 
@@ -204,7 +214,7 @@ const EditorWrapper: React.FC = () => {
     // Check if the over element is in the droppable area
     const droppableId = "droppable"; // This should match the ID in useDroppable
     const overId = over.id;
-    console.log(overId);
+    console.log(active);
     // You can compare overId with droppableId or any other logic you need
     if (overId === droppableId) {
       // Handle specific logic when dragging over the droppable area
@@ -361,13 +371,6 @@ const EditorWrapper: React.FC = () => {
                     ))}
                   </div>
                 </SortableContext>
-                <DragOverlay>
-                  {activeId ? (
-                    <div className="h-12 rounded border border-gray-400 bg-gray-100 p-2 text-black">
-                      {activeId}
-                    </div>
-                  ) : null}
-                </DragOverlay>
               </div>
             )}
             <div className="ml-1/4 flex flex-1 flex-col p-4">

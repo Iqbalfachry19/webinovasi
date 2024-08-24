@@ -231,46 +231,6 @@ const Editor: React.FC<EditorProps> = ({
     // You can compare overId with droppableId or any other logic you need
     if (overId === droppableId) {
       // Handle specific logic when dragging over the droppable area
-      const getComponentIndex = (id: string) => {
-        if (layouts.includes(id)) {
-          return layouts.findIndex((item) => item === id);
-        } else if (basics.includes(id)) {
-          return basics.findIndex((item) => item === id);
-        } else if (generals.includes(id)) {
-          return generals.findIndex((item) => item === id);
-        }
-        return -1;
-      };
-
-      const getComponentCategory = (id: string) => {
-        if (layouts.includes(id)) return "layouts";
-        if (basics.includes(id)) return "basics";
-        if (generals.includes(id)) return "generals";
-        return null;
-      };
-
-      const oldIndex = getComponentIndex(active.id);
-      const newIndex = getComponentIndex(over.id);
-
-      if (oldIndex === -1 || newIndex === -1) return;
-
-      const oldCategory = getComponentCategory(active.id);
-      const newCategory = getComponentCategory(over.id);
-
-      if (oldCategory && newCategory && oldCategory === newCategory) {
-        if (oldCategory === "layouts") {
-          setLayouts((prevLayouts) =>
-            arrayMove(prevLayouts, oldIndex, newIndex),
-          );
-        } else if (oldCategory === "basics") {
-          setBasics((prevBasics) => arrayMove(prevBasics, oldIndex, newIndex));
-        } else if (oldCategory === "generals") {
-          setGenerals((prevGenerals) =>
-            arrayMove(prevGenerals, oldIndex, newIndex),
-          );
-        }
-      }
-      setActiveId(null);
     }
   };
   return (
@@ -283,7 +243,7 @@ const Editor: React.FC<EditorProps> = ({
         onDragOver={handleDragOver}
       > */}
       <SortableContext
-        items={components.map((item: any) => item.id)}
+        items={components}
         strategy={verticalListSortingStrategy}
       >
         <DroppableArea
