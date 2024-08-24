@@ -112,6 +112,8 @@ interface ComponentProps {
 }
 
 interface EditorProps {
+  activeId: string | null;
+  setActiveId: (id: any) => void;
   components:
     | Array<{
         id: string;
@@ -126,6 +128,8 @@ interface EditorProps {
 }
 
 const Editor: React.FC<EditorProps> = ({
+  activeId,
+  setActiveId,
   components,
   setComponents,
   onDragEnd,
@@ -136,7 +140,8 @@ const Editor: React.FC<EditorProps> = ({
   const [selectedComponent, setSelectedComponent] = useState<string | null>(
     null,
   );
-  const [activeId, setActiveId] = useState(null);
+
+  // const [activeId, setActiveId] = useState(null);
 
   const [buttonNotClicked, setButtonNotClicked] = useState<boolean>(true);
 
@@ -207,40 +212,96 @@ const Editor: React.FC<EditorProps> = ({
 
     setActiveId(active.id);
   }
+
   const sensors = useSensors(
     useSensor(MouseSensor, {
       activationConstraint: { distance: 5 },
     }),
     useSensor(TouchSensor),
   );
+  const handleDragOver = (event: any) => {
+    const { active, over } = event;
+
+    if (!over) return;
+
+    // Check if the over element is in the droppable area
+    const droppableId = "droppable"; // This should match the ID in useDroppable
+    const overId = over.id;
+    console.log(overId);
+    // You can compare overId with droppableId or any other logic you need
+    if (overId === droppableId) {
+      // Handle specific logic when dragging over the droppable area
+      const getComponentIndex = (id: string) => {
+        if (layouts.includes(id)) {
+          return layouts.findIndex((item) => item === id);
+        } else if (basics.includes(id)) {
+          return basics.findIndex((item) => item === id);
+        } else if (generals.includes(id)) {
+          return generals.findIndex((item) => item === id);
+        }
+        return -1;
+      };
+
+      const getComponentCategory = (id: string) => {
+        if (layouts.includes(id)) return "layouts";
+        if (basics.includes(id)) return "basics";
+        if (generals.includes(id)) return "generals";
+        return null;
+      };
+
+      const oldIndex = getComponentIndex(active.id);
+      const newIndex = getComponentIndex(over.id);
+
+      if (oldIndex === -1 || newIndex === -1) return;
+
+      const oldCategory = getComponentCategory(active.id);
+      const newCategory = getComponentCategory(over.id);
+
+      if (oldCategory && newCategory && oldCategory === newCategory) {
+        if (oldCategory === "layouts") {
+          setLayouts((prevLayouts) =>
+            arrayMove(prevLayouts, oldIndex, newIndex),
+          );
+        } else if (oldCategory === "basics") {
+          setBasics((prevBasics) => arrayMove(prevBasics, oldIndex, newIndex));
+        } else if (oldCategory === "generals") {
+          setGenerals((prevGenerals) =>
+            arrayMove(prevGenerals, oldIndex, newIndex),
+          );
+        }
+      }
+      setActiveId(null);
+    }
+  };
   return (
     <>
-      <DndContext
+      {/* <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
+        onDragOver={handleDragOver}
+      > */}
+      <SortableContext
+        items={components.map((item: any) => item.id)}
+        strategy={verticalListSortingStrategy}
       >
-        <SortableContext
-          items={components.map((item: any) => item.id)}
-          strategy={verticalListSortingStrategy}
-        >
-          <DroppableArea
-            components={components}
-            onComponentClick={handleComponentClick}
-            layoutType={layoutType}
-            generateLayoutClasses={generateLayoutClasses}
-            setButtonNotClicked={setButtonNotClicked}
-            buttonNotClicked={buttonNotClicked}
-            handleLayoutSelection={handleLayoutSelection}
-          />
-        </SortableContext>
-        <DragOverlay>
-          {activeId ? (
-            <div className="h-12 rounded border border-gray-400 bg-gray-100 p-2"></div>
-          ) : null}
-        </DragOverlay>
-      </DndContext>
+        <DroppableArea
+          components={components}
+          onComponentClick={handleComponentClick}
+          layoutType={layoutType}
+          generateLayoutClasses={generateLayoutClasses}
+          setButtonNotClicked={setButtonNotClicked}
+          buttonNotClicked={buttonNotClicked}
+          handleLayoutSelection={handleLayoutSelection}
+        />
+      </SortableContext>
+      <DragOverlay>
+        {activeId ? (
+          <div className="h-12 rounded border border-gray-400 bg-gray-100 p-2"></div>
+        ) : null}
+      </DragOverlay>
+      {/* </DndContext> */}
     </>
   );
 };

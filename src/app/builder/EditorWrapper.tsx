@@ -12,6 +12,7 @@ import {
   useSensors,
   useDroppable,
   TouchSensor,
+  DragOverlay,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -84,6 +85,7 @@ interface ComponentProps {
 
 const EditorWrapper: React.FC = () => {
   const { editorEnabled, toggleEditor } = useConfig();
+  const [activeId, setActiveId] = useState(null);
   const [components, setComponents] = useState<ComponentProps[]>([]);
   const [layouts, setLayouts] = useState(["Container", "Grid"]);
   const [basics, setBasics] = useState([
@@ -173,7 +175,14 @@ const EditorWrapper: React.FC = () => {
         );
       }
     }
+    setActiveId(null);
   };
+
+  function handleDragStart(event: any) {
+    const { active } = event;
+
+    setActiveId(active.id);
+  }
 
   const handleComponentChange = (
     id: string,
@@ -186,6 +195,53 @@ const EditorWrapper: React.FC = () => {
           : comp,
       ),
     );
+  };
+  const handleDragOver = (event: any) => {
+    const { active, over } = event;
+
+    if (!over) return;
+
+    // Check if the over element is in the droppable area
+    const droppableId = "droppable"; // This should match the ID in useDroppable
+    const overId = over.id;
+    console.log(overId);
+    // You can compare overId with droppableId or any other logic you need
+    if (overId === droppableId) {
+      // Handle specific logic when dragging over the droppable area
+      const defaultProps: any = {
+        Video: {
+          src: "https://www.youtube.com/watch?v=XHOmBV4js_E",
+          width: 640,
+          height: 360,
+          alt: "Video description",
+        },
+        Divider: { thickness: 2 },
+        Spacer: { margin: 10 },
+        "Google Map": {
+          latitude: 0,
+          longitude: 0,
+          zoom: 8,
+          mapType: "roadmap",
+        },
+        Icon: { icon: "home", size: 24, color: "#000000" },
+        Form: { action: "", method: "POST", fields: [] },
+      };
+      const existingComponent = components.find(
+        (comp) => comp.type === active.id,
+      );
+
+      if (!existingComponent) {
+        const newComponent: ComponentProps = {
+          id: `${components.length + 1}`,
+          type: active.id,
+          props: defaultProps[active.id] || {},
+        };
+        setComponents((prevComponents) => [...prevComponents, newComponent]);
+        setSelectedComponent(newComponent);
+      } else {
+        setSelectedComponent(existingComponent);
+      }
+    }
   };
 
   const onComponentClick = (id: string) => {
@@ -211,7 +267,7 @@ const EditorWrapper: React.FC = () => {
       Form: { action: "", method: "POST", fields: [] },
     };
     const existingComponent = components.find((comp) => comp.type === type);
-    console.log(type);
+
     if (!existingComponent) {
       const newComponent: ComponentProps = {
         id: `${components.length + 1}`,
@@ -234,30 +290,32 @@ const EditorWrapper: React.FC = () => {
   };
 
   return (
-    <div className="relative flex select-none">
-      <button
-        onClick={handleSidebarToggle}
-        className={`transition-all duration-300 ease-in-out ${
-          sidebarVisible
-            ? "absolute right-3/4 top-1/2 flex -translate-y-1/2 transform items-center rounded bg-gray-800 p-2 text-white"
-            : "absolute left-0 top-1/2 -translate-y-1/2 transform bg-gray-800 p-2 text-white"
-        }`}
-      >
-        {sidebarVisible ? (
-          <ChevronLeftIcon className="h-5 w-5" />
-        ) : (
-          <ChevronRightIcon className="h-5 w-5" />
-        )}
-      </button>
+    <DndContext
+      collisionDetection={closestCenter}
+      sensors={sensors}
+      onDragEnd={onDragEnd}
+      onDragOver={handleDragOver}
+      onDragStart={handleDragStart}
+    >
+      <div className="relative flex select-none">
+        <button
+          onClick={handleSidebarToggle}
+          className={`transition-all duration-300 ease-in-out ${
+            sidebarVisible
+              ? "absolute right-3/4 top-1/2 flex -translate-y-1/2 transform items-center rounded bg-gray-800 p-2 text-white"
+              : "absolute left-0 top-1/2 -translate-y-1/2 transform bg-gray-800 p-2 text-white"
+          }`}
+        >
+          {sidebarVisible ? (
+            <ChevronLeftIcon className="h-5 w-5" />
+          ) : (
+            <ChevronRightIcon className="h-5 w-5" />
+          )}
+        </button>
 
-      {editorEnabled && (
-        <div className="flex w-full select-none">
-          {sidebarVisible && (
-            <DndContext
-              collisionDetection={closestCenter}
-              sensors={sensors}
-              onDragEnd={onDragEnd} // Pass onDragEnd to DndContext
-            >
+        {editorEnabled && (
+          <div className="flex w-full select-none">
+            {sidebarVisible && (
               <div className="w-1/4 select-none bg-gray-800 p-4 text-white">
                 <h2 className="mb-4 text-lg font-semibold">Elements</h2>
                 {/* Sidebar content */}
@@ -303,31 +361,40 @@ const EditorWrapper: React.FC = () => {
                     ))}
                   </div>
                 </SortableContext>
+                <DragOverlay>
+                  {activeId ? (
+                    <div className="h-12 rounded border border-gray-400 bg-gray-100 p-2 text-black">
+                      {activeId}
+                    </div>
+                  ) : null}
+                </DragOverlay>
               </div>
-            </DndContext>
-          )}
-          <div className="ml-1/4 flex flex-1 flex-col p-4">
-            <Editor
-              setComponents={setComponents}
-              components={components}
-              onComponentClick={onComponentClick}
-              onAddComponent={onAddComponent}
-              onDragEnd={onDragEnd} // Pass the onDragEnd prop to Editor
-            />
-          </div>
+            )}
+            <div className="ml-1/4 flex flex-1 flex-col p-4">
+              <Editor
+                activeId={activeId}
+                setActiveId={setActiveId}
+                setComponents={setComponents}
+                components={components}
+                onComponentClick={onComponentClick}
+                onAddComponent={onAddComponent}
+                onDragEnd={onDragEnd} // Pass the onDragEnd prop to Editor
+              />
+            </div>
 
-          {selectedComponent && (
-            <PropertyPanel
-              component={selectedComponent}
-              onChange={(newProps) =>
-                handleComponentChange(selectedComponent.id, newProps)
-              }
-              onClose={handleClosePropertyPanel}
-            />
-          )}
-        </div>
-      )}
-    </div>
+            {selectedComponent && (
+              <PropertyPanel
+                component={selectedComponent}
+                onChange={(newProps) =>
+                  handleComponentChange(selectedComponent.id, newProps)
+                }
+                onClose={handleClosePropertyPanel}
+              />
+            )}
+          </div>
+        )}
+      </div>
+    </DndContext>
   );
 };
 
