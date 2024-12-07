@@ -309,6 +309,7 @@ const EditorWrapper: React.FC = () => {
     >
       <div className="relative flex select-none">
         <button
+          id="text"
           onClick={handleSidebarToggle}
           className={`transition-all duration-300 ease-in-out ${
             sidebarVisible

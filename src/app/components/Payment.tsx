@@ -212,9 +212,8 @@ function Payment() {
   };
 
   return (
-    <div className="mx-auto max-w-md p-4">
+    (<div className="mx-auto max-w-md p-4">
       <h1 className="mb-4 text-2xl font-bold">Payment Page</h1>
-
       <div className="mb-4">
         <input
           type="text"
@@ -230,7 +229,6 @@ function Payment() {
           Check Domain
         </button>
       </div>
-
       <div className="mb-4">
         <label
           htmlFor="name"
@@ -247,7 +245,6 @@ function Payment() {
           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
         />
       </div>
-
       <div className="mb-4">
         <label
           htmlFor="email"
@@ -264,7 +261,6 @@ function Payment() {
           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
         />
       </div>
-
       <div className="mb-4">
         <label
           htmlFor="address"
@@ -281,7 +277,6 @@ function Payment() {
           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
         />
       </div>
-
       <div className="mb-4">
         <label
           htmlFor="whatsapp"
@@ -298,7 +293,6 @@ function Payment() {
           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5B59C2]"
         />
       </div>
-
       <div className="mb-4">
         <label
           htmlFor="theme-select"
@@ -308,7 +302,6 @@ function Payment() {
         </label>
         <p className="mt-1 text-gray-900">{selectedTheme}</p>
       </div>
-
       <div className="mb-4">
         <label
           htmlFor="hosting-package"
@@ -327,7 +320,6 @@ function Payment() {
           <option value="3-year">3 Years - IDR 2.100.000</option>
         </select>
       </div>
-
       {isLoading && (
         <div className="my-4 text-sm text-gray-600">Loading...</div>
       )}
@@ -389,13 +381,12 @@ function Payment() {
           </pre>
         </>
       )}
-
       <Script
         src="https://app.midtrans.com/snap/snap.js"
         data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
         onLoad={() => setIsSnapLoaded(true)}
       />
-    </div>
+    </div>)
   );
 }
 // const contract = getContract({
